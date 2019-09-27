@@ -1,0 +1,39 @@
+syntax = "proto3";
+package core.config;
+
+option csharp_namespace = "Core.Common";
+
+message Key {
+    string value = 1;
+}
+
+message SetSetting {
+    string key = 1;
+    string value = 2;
+    SettingType type = 3;
+    string environment = 4;
+    string application = 5;
+    string domain = 6;
+    string userName = 7;
+    bool encrypt = 8;
+}
+
+message ConfigBlob {
+    repeated Setting settings = 1;
+}
+
+enum SettingType {
+    NULL = 0;
+    STRING = 1;
+    INT = 2;
+    DOUBLE = 3;
+    STRING_ARRAY = 4;
+    INT_ARRAY = 5;
+    URI = 6;
+}
+
+message Setting {
+    string key = 1;
+    string value = 2;
+    SettingType type = 3;
+}

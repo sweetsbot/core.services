@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
+import "config_messages.proto";
+package core.proto;
+
+option csharp_namespace = "Core.Services";
+
+service Config {
+    rpc GetSetting(core.config.Key) returns (core.config.Setting);
+    rpc AddSetting(core.config.SetSetting) returns (google.protobuf.BoolValue);
+    rpc GetUserConfig(google.protobuf.Empty) returns (core.config.ConfigBlob);
+    rpc ResetCache(google.protobuf.Empty) returns (google.protobuf.Empty);
+    rpc GetGroupConfig(core.config.Key) returns (core.config.ConfigBlob);
+}
+

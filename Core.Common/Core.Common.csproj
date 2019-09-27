@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Protobuf Include="..\Proto\config.proto" OutputDir="Services/%(RelativePath)" CompileOutputs="false" GrpcServices="Both" Link="Protos\config.proto" />
+        <Protobuf Include="..\Proto\config_messages.proto" OutputDir="%(RelativePath)" CompileOutputs="false" GrpcServices="None" Link="Protos\config_messages.proto" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <PackageReference Include="Grpc.Core.Api" Version="2.23.0" />
+      <PackageReference Include="System.Text.Json" Version="4.6.0" />
+        <PackageReference Include="Google.Protobuf" Version="3.9.1" />
+        <PackageReference Include="Google.Protobuf.Tools" Version="3.9.1" GeneratePathProperty="true">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Grpc.Tools" Version="2.23.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Folder Include="Services" />
+    </ItemGroup>
+
+</Project>

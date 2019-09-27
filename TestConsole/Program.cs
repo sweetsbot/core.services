@@ -1,0 +1,174 @@
+﻿using System;
+using System.Linq;
+using System.Net.Http;
+using System.Text.Json;
+using System.Threading.Tasks;
+using System.Web;
+using Core.Common;
+using Grpc.Core;
+using Grpc.Net.Client;
+
+namespace TestConsole
+{
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            using var channel = GrpcChannel.ForAddress("https://localhost:5001");
+            var client = new Core.Services.Config.ConfigClient(channel);
+
+            Console.WriteLine("gRPC ConfigService");
+            Console.WriteLine();
+            Console.WriteLine("Press a key:");
+            Console.WriteLine("0: Authenticate");
+            Console.WriteLine("1: Get Setting");
+            Console.WriteLine("2: Get GroupConfig");
+            Console.WriteLine("3: Get UserConfig");
+            Console.WriteLine("4: Reset Cache");
+            Console.WriteLine("5: Exit");
+            Console.WriteLine("-: show jwt");
+            Console.WriteLine();
+
+            string token = null;
+
+            var exiting = false;
+            while (!exiting)
+            {
+                var consoleKeyInfo = Console.ReadKey(intercept: true);
+                switch (consoleKeyInfo.KeyChar)
+                {
+                    case '-':
+                        Console.WriteLine($"Token Value: {token}");
+                        break;
+                    case '0':
+                        token = await Authenticate();
+                        break;
+                    case '1':
+                        await GetSetting(client, token);
+                        break;
+                    case '2':
+                        await GetGroupConfig(client, token);
+                        break;
+                    case '3':
+                        await GetUserConfig(client, token);
+                        break;
+                    case '4':
+                        await ResetCache(client, token);
+                        break;
+                    case '5':
+                        exiting = true;
+                        break;
+                }
+            }
+
+            Console.WriteLine("Exiting");
+        }
+
+        private static async Task<string> Authenticate()
+        {
+            Console.WriteLine($"Authenticating as {Environment.UserName}...");
+
+            SessionRequest sessionInfo = new SessionRequest
+            {
+                 Application = "TestConsole",
+                 ApplicationVersion = new Version(1, 7),
+                 DomainName = Environment.UserDomainName,
+                 UserName = Environment.UserName,
+                 MachineName = Environment.MachineName,
+                 Department = "Main"
+            };
+
+            using var httpClient = new HttpClient();
+            var request = new HttpRequestMessage
+            {
+                RequestUri = new Uri($"https://localhost:5001/token?name={HttpUtility.UrlEncode(Environment.UserName)}"),
+                Method = HttpMethod.Post,
+                Version = new Version(2, 0),
+                Content = new ReadOnlyMemoryContent(JsonSerializer.SerializeToUtf8Bytes(sessionInfo))
+            };
+
+            var tokenResponse = await httpClient.SendAsync(request);
+            tokenResponse.EnsureSuccessStatusCode();
+
+            var token = await tokenResponse.Content.ReadAsStringAsync();
+            Console.WriteLine("Successfully authenticated.");
+
+            return token;
+        }
+
+        private static Metadata GetHeaders(string token)
+        {
+            Metadata headers = null;
+            if (!string.IsNullOrEmpty(token))
+            {
+                headers = new Metadata
+                {
+                    { "Authorization", $"Bearer {token}" }
+                };
+            }
+            return headers;
+        }
+
+        private static async Task GetSetting(Core.Services.Config.ConfigClient client, string token)
+        {
+            Console.WriteLine("Getting a single setting...");
+            try
+            {
+                var headers = GetHeaders(token);
+                var resp = await client.GetSettingAsync("key", headers);
+                Console.WriteLine($"Recieved: {resp.Key}::{resp.Value}::{resp.Type}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error getting setting.{Environment.NewLine}{ex}");
+            }
+        }
+
+        private static async Task GetGroupConfig(Core.Services.Config.ConfigClient client, string token)
+        {
+            Console.WriteLine("Getting group key setting...");
+            try
+            {
+                var headers = GetHeaders(token);
+                var resp = await client.GetGroupConfigAsync("groupKey", headers);
+                foreach (var (index, setting) in resp.Settings.Select((p, i) => (i, p)))
+                    Console.WriteLine($"{index} => {setting.Key} [{setting.Value}({setting.Type})]");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error getting setting.{Environment.NewLine}{ex}");
+            }
+        }
+
+        private static async Task GetUserConfig(Core.Services.Config.ConfigClient client, string token)
+        {
+            Console.WriteLine("Getting user's setting...");
+            try
+            {
+                var headers = GetHeaders(token);
+                var resp = await client.GetUserConfigAsync(headers);
+                foreach (var (index, setting) in resp.Settings.Select((p, i) => (i, p)))
+                    Console.WriteLine($"{index} => {setting.Key} [{setting.Value}({setting.Type})]");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error getting setting.{Environment.NewLine}{ex}");
+            }
+        }
+
+        private static async Task ResetCache(Core.Services.Config.ConfigClient client, string token)
+        {
+            Console.WriteLine("resetting cache...");
+            try
+            {
+                var headers = GetHeaders(token);
+                var resp = await client.ResetCacheAsync(headers);
+                Console.WriteLine($"Reset Cache");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error resetting cache. {Environment.NewLine}{ex}");
+            }
+        }
+    }
+}
