@@ -32,9 +32,10 @@ namespace Core.Common {
             "eXB0GAggASgIIjQKCkNvbmZpZ0Jsb2ISJgoIc2V0dGluZ3MYASADKAsyFC5j",
             "b3JlLmNvbmZpZy5TZXR0aW5nIk0KB1NldHRpbmcSCwoDa2V5GAEgASgJEg0K",
             "BXZhbHVlGAIgASgJEiYKBHR5cGUYAyABKA4yGC5jb3JlLmNvbmZpZy5TZXR0",
-            "aW5nVHlwZSpiCgtTZXR0aW5nVHlwZRIICgROVUxMEAASCgoGU1RSSU5HEAES",
-            "BwoDSU5UEAISCgoGRE9VQkxFEAMSEAoMU1RSSU5HX0FSUkFZEAQSDQoJSU5U",
-            "X0FSUkFZEAUSBwoDVVJJEAZCDqoCC0NvcmUuQ29tbW9uYgZwcm90bzM="));
+            "aW5nVHlwZSpvCgtTZXR0aW5nVHlwZRIICgROVUxMEAASCgoGU1RSSU5HEAES",
+            "BwoDSU5UEAISCgoGRE9VQkxFEAMSCwoHQk9PTEVBThAEEhAKDFNUUklOR19B",
+            "UlJBWRAFEg0KCUlOVF9BUlJBWRAGEgcKA1VSSRAHQg6qAgtDb3JlLkNvbW1v",
+            "bmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Core.Common.SettingType), }, new pbr::GeneratedClrTypeInfo[] {
@@ -53,9 +54,10 @@ namespace Core.Common {
     [pbr::OriginalName("STRING")] String = 1,
     [pbr::OriginalName("INT")] Int = 2,
     [pbr::OriginalName("DOUBLE")] Double = 3,
-    [pbr::OriginalName("STRING_ARRAY")] StringArray = 4,
-    [pbr::OriginalName("INT_ARRAY")] IntArray = 5,
-    [pbr::OriginalName("URI")] Uri = 6,
+    [pbr::OriginalName("BOOLEAN")] Boolean = 4,
+    [pbr::OriginalName("STRING_ARRAY")] StringArray = 5,
+    [pbr::OriginalName("INT_ARRAY")] IntArray = 6,
+    [pbr::OriginalName("URI")] Uri = 7,
   }
 
   #endregion

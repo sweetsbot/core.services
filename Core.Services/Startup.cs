@@ -1,18 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text.Json;
-using System.Threading.Tasks;
+using Autofac;
+using Core.Business.Module;
 using Core.Common;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using StackExchange.Redis.Extensions.Core.Configuration;
 
 namespace Core.Services
 {
@@ -24,6 +25,16 @@ namespace Core.Services
 
         private readonly Random Random = new Random();
 
+        public Startup(IHostEnvironment env)
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
+            this.Configuration = builder.Build();
+        }
+        
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
@@ -55,6 +66,15 @@ namespace Core.Services
                 });
         }
 
+        public IConfigurationRoot Configuration { get; set; }
+
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.RegisterModule(new RedisModule {RedisConfiguration = Configuration.GetSection("Redis").Get<RedisConfiguration>()});
+            builder.RegisterModule(new DataAccessModule {CoreConnectionString = Configuration.GetConnectionString("PostgresCore")});
+            builder.RegisterModule(new BusinessModule() {SecretKey = "secretKey"});
+        }
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -72,12 +92,15 @@ namespace Core.Services
             {
                 endpoints.MapGrpcService<ConfigService>();
 
-                endpoints.MapGet("/",async context =>
+                endpoints.MapGet("/",
+                    async context =>
                     {
-                        await context.Response.WriteAsync("Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
+                        await context.Response.WriteAsync(
+                            "Communication with gRPC endpoints must be made through a gRPC client. " +
+                            "To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
                     });
 
-                endpoints.MapGet("/token", async context =>
+                endpoints.MapPost("/token", async context =>
                 {
                     var sessionRequest = await JsonSerializer.DeserializeAsync<SessionRequest>(context.Request.Body);
                     await context.Response.WriteAsync(GenerateJwtToken(sessionRequest));
@@ -93,12 +116,14 @@ namespace Core.Services
                 new Claim(CoreClaimTypes.Application, sessionRequest.VersionString()),
                 new Claim(CoreClaimTypes.Department, sessionRequest.Department),
                 new Claim(CoreClaimTypes.MachineName, sessionRequest.MachineName),
-                new Claim(CoreClaimTypes.Session, Random.Next().ToString(), ClaimValueTypes.Integer32),
-                new Claim(CoreClaimTypes.Role, "Developer"), 
-                new Claim(CoreClaimTypes.Role, "User"), 
+                new Claim(CoreClaimTypes.Session, Random.Next().ToString(), ClaimValueTypes.Integer64),
+                new Claim(CoreClaimTypes.Role, "Developer"),
+                new Claim(CoreClaimTypes.Role, "User"),
             };
             var credentials = new SigningCredentials(SecurityKey, SecurityAlgorithms.HmacSha256);
-            var token = new JwtSecurityToken("Core.Services", "Client", claims, expires: DateTime.Now.AddHours(18), signingCredentials: credentials);
+            var token = new JwtSecurityToken("Core.Services", "Client", claims,
+                expires: DateTime.Now.AddHours(18),
+                signingCredentials: credentials);
             return JwtTokenHandler.WriteToken(token);
         }
     }

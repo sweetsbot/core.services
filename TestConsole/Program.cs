@@ -14,86 +14,90 @@ namespace TestConsole
     {
         static async Task Main(string[] args)
         {
-            using var channel = GrpcChannel.ForAddress("https://localhost:5001");
-            var client = new Core.Services.Config.ConfigClient(channel);
-
-            Console.WriteLine("gRPC ConfigService");
-            Console.WriteLine();
-            Console.WriteLine("Press a key:");
-            Console.WriteLine("0: Authenticate");
-            Console.WriteLine("1: Get Setting");
-            Console.WriteLine("2: Get GroupConfig");
-            Console.WriteLine("3: Get UserConfig");
-            Console.WriteLine("4: Reset Cache");
-            Console.WriteLine("5: Exit");
-            Console.WriteLine("-: show jwt");
-            Console.WriteLine();
-
-            string token = null;
-
-            var exiting = false;
-            while (!exiting)
+            using (var channel = GrpcChannel.ForAddress("https://localhost:5001"))
             {
-                var consoleKeyInfo = Console.ReadKey(intercept: true);
-                switch (consoleKeyInfo.KeyChar)
-                {
-                    case '-':
-                        Console.WriteLine($"Token Value: {token}");
-                        break;
-                    case '0':
-                        token = await Authenticate();
-                        break;
-                    case '1':
-                        await GetSetting(client, token);
-                        break;
-                    case '2':
-                        await GetGroupConfig(client, token);
-                        break;
-                    case '3':
-                        await GetUserConfig(client, token);
-                        break;
-                    case '4':
-                        await ResetCache(client, token);
-                        break;
-                    case '5':
-                        exiting = true;
-                        break;
-                }
-            }
+                var client = new Core.Services.Config.ConfigClient(channel);
 
-            Console.WriteLine("Exiting");
+                Console.WriteLine("gRPC ConfigService");
+                Console.WriteLine();
+                Console.WriteLine("Press a key:");
+                Console.WriteLine("0: Authenticate");
+                Console.WriteLine("1: Get Setting");
+                Console.WriteLine("2: Get GroupConfig");
+                Console.WriteLine("3: Get UserConfig");
+                Console.WriteLine("4: Reset Cache");
+                Console.WriteLine("5: Exit");
+                Console.WriteLine("-: show jwt");
+                Console.WriteLine();
+
+                string token = null;
+
+                var exiting = false;
+                while (!exiting)
+                {
+                    var consoleKeyInfo = Console.ReadKey(intercept: true);
+                    switch (consoleKeyInfo.KeyChar)
+                    {
+                        case '-':
+                            Console.WriteLine($"Token Value: {token}");
+                            break;
+                        case '0':
+                            token = await Authenticate();
+                            break;
+                        case '1':
+                            await GetSetting(client, token);
+                            break;
+                        case '2':
+                            await GetGroupConfig(client, token);
+                            break;
+                        case '3':
+                            await GetUserConfig(client, token);
+                            break;
+                        case '4':
+                            await ResetCache(client, token);
+                            break;
+                        case '5':
+                            exiting = true;
+                            break;
+                    }
+                }
+
+                Console.WriteLine("Exiting");
+            }
         }
 
         private static async Task<string> Authenticate()
         {
             Console.WriteLine($"Authenticating as {Environment.UserName}...");
 
-            SessionRequest sessionInfo = new SessionRequest
+            var sessionInfo = new SessionRequest
             {
-                 Application = "TestConsole",
-                 ApplicationVersion = new Version(1, 7),
-                 DomainName = Environment.UserDomainName,
-                 UserName = Environment.UserName,
-                 MachineName = Environment.MachineName,
-                 Department = "Main"
+                Application = "TestConsole",
+                ApplicationVersion = new Version(1, 7),
+                DomainName = Environment.UserDomainName,
+                UserName = Environment.UserName,
+                MachineName = Environment.MachineName,
+                Department = "Main"
             };
 
-            using var httpClient = new HttpClient();
-            var request = new HttpRequestMessage
+            using (var httpClient = new HttpClient())
             {
-                RequestUri = new Uri($"https://localhost:5001/token?name={HttpUtility.UrlEncode(Environment.UserName)}"),
-                Method = HttpMethod.Post,
-                Version = new Version(2, 0),
-                Content = new ReadOnlyMemoryContent(JsonSerializer.SerializeToUtf8Bytes(sessionInfo))
-            };
+                var request = new HttpRequestMessage
+                {
+                    RequestUri = new Uri($"https://localhost:5001/token"),
+                    Method = HttpMethod.Post,
+                    Version = new Version(2, 0),
+                    Content = new ReadOnlyMemoryContent(JsonSerializer.SerializeToUtf8Bytes(sessionInfo))
+                };
 
-            var tokenResponse = await httpClient.SendAsync(request);
-            tokenResponse.EnsureSuccessStatusCode();
+                var tokenResponse = await httpClient.SendAsync(request);
+                tokenResponse.EnsureSuccessStatusCode();
 
-            var token = await tokenResponse.Content.ReadAsStringAsync();
-            Console.WriteLine("Successfully authenticated.");
+                var token = await tokenResponse.Content.ReadAsStringAsync();
+                Console.WriteLine("Successfully authenticated.");
 
-            return token;
+                return token;
+            }
         }
 
         private static Metadata GetHeaders(string token)
@@ -103,9 +107,10 @@ namespace TestConsole
             {
                 headers = new Metadata
                 {
-                    { "Authorization", $"Bearer {token}" }
+                    {"Authorization", $"Bearer {token}"}
                 };
             }
+
             return headers;
         }
 
@@ -115,6 +120,8 @@ namespace TestConsole
             try
             {
                 var headers = GetHeaders(token);
+                Console.Write("Key? ");
+                var keyName = Console.ReadLine();
                 var resp = await client.GetSettingAsync("key", headers);
                 Console.WriteLine($"Recieved: {resp.Key}::{resp.Value}::{resp.Type}");
             }
@@ -130,7 +137,9 @@ namespace TestConsole
             try
             {
                 var headers = GetHeaders(token);
-                var resp = await client.GetGroupConfigAsync("groupKey", headers);
+                Console.Write("Group? ");
+                var keyName = Console.ReadLine();
+                var resp = await client.GetGroupConfigAsync(keyName, headers);
                 foreach (var (index, setting) in resp.Settings.Select((p, i) => (i, p)))
                     Console.WriteLine($"{index} => {setting.Key} [{setting.Value}({setting.Type})]");
             }

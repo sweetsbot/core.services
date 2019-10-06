@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Autofac" Version="4.9.4" />
+      <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="3.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.0.0" />
+      <PackageReference Include="StackExchange.Redis" Version="2.0.601" />
+      <PackageReference Include="StackExchange.Redis.Extensions.Newtonsoft" Version="5.2.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Core.Common\Core.Common.csproj" />
+      <ProjectReference Include="..\Core.DataAccess\Core.DataAccess.csproj" />
+    </ItemGroup>
+
+</Project>

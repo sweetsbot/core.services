@@ -1,15 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
+        <LangVersion>latest</LangVersion>
         <TargetFramework>netcoreapp3.0</TargetFramework>
     </PropertyGroup>
     
     <ItemGroup>
+        <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="5.0.0" />
         <PackageReference Include="Grpc.AspNetCore" Version="2.23.1" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.0.0" />
+        <PackageReference Include="StackExchange.Redis" Version="2.0.601" />
+        <PackageReference Include="StackExchange.Redis.Extensions.Newtonsoft" Version="5.2.0" />
     </ItemGroup>
     
     <ItemGroup>
+      <ProjectReference Include="..\Core.Business\Core.Business.csproj" />
       <ProjectReference Include="..\Core.Common\Core.Common.csproj" />
     </ItemGroup>
 

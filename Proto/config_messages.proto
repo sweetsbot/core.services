@@ -27,9 +27,11 @@ enum SettingType {
     STRING = 1;
     INT = 2;
     DOUBLE = 3;
-    STRING_ARRAY = 4;
-    INT_ARRAY = 5;
-    URI = 6;
+    BOOLEAN = 4;
+    STRING_ARRAY = 5;
+    INT_ARRAY = 6;
+    URI = 7;
+    
 }
 
 message Setting {
