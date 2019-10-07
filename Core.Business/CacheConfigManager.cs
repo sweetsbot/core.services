@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Core.Common;
@@ -129,7 +130,6 @@ namespace Core.Business
         {
             try
             {
-                _logger.LogDebug("Connected to cache for reset.");
                 var keys = await _cacheClient.Db0.SearchKeysAsync(
                     $"{Prefix}:{_env.EnvironmentName}:*");
                 var batches = keys

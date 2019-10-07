@@ -1,4 +1,6 @@
+using System;
 using System.Linq;
+using System.Security;
 using System.Threading.Tasks;
 using Core.Business;
 using Core.Common;
@@ -19,7 +21,7 @@ namespace Core.Services
             _logger = logger;
             _manager = manager;
         }
-        
+
         [Authorize]
         public override async Task<Setting> GetSetting(Key request, ServerCallContext context)
         {
@@ -40,15 +42,29 @@ namespace Core.Services
         {
             var user = context.GetHttpContext().User;
             var entries = await _manager.GetUserConfigurationAsync(user);
-            return new ConfigBlob { Settings = { entries.Select(Setting.FromEntry) }};
+            return new ConfigBlob {Settings = {entries.Select(Setting.FromEntry)}};
         }
 
         [Authorize]
         public override async Task<Empty> ResetCache(Empty _, ServerCallContext context)
         {
-            var user = context.GetHttpContext().User;
-            await _manager.ResetCacheAsync(user);
-            return new Empty();
+            try
+            {
+                var user = context.GetHttpContext().User;
+                _logger.LogDebug($"User {user.ToBlameString()} wants to reset the cache.");
+                if (!user.IsInRole("Developer") && !user.IsInRole("AllTasks"))
+                {
+                    _logger.LogWarning($"User {user.ToBlameString()} is not permitted to reset the cache.");
+                    throw new SecurityException($"User {user.ToBlameString()} is not permitted to reset the cache.");
+                }
+                await _manager.ResetCacheAsync(user);
+                return new Empty();
+            }
+            catch (Exception ex) when (!(ex is RpcException))
+            {
+                _logger.LogError(ex, "Failed to reset cache.");
+                throw new RpcException(new Status(StatusCode.PermissionDenied, ex.Message));
+            }
         }
 
         [Authorize]
@@ -57,7 +73,7 @@ namespace Core.Services
             var user = context.GetHttpContext().User;
             _logger.LogDebug($"{user.Identity.Name} has requested a group of settings.");
             var entries = await _manager.GetGroupConfigurationAsync(user, request.Value);
-            return new ConfigBlob { Settings = { entries.Select(Setting.FromEntry) }};
+            return new ConfigBlob {Settings = {entries.Select(Setting.FromEntry)}};
         }
     }
 }

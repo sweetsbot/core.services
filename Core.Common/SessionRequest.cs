@@ -13,8 +13,5 @@ namespace Core.Common
         public Version ApplicationVersion { get; set; }
         public string MachineName { get; set; }
         public string Department { get; set; }
-
-        public string ToBlameString() => $"{DomainName}\\{UserName}";
-        public string VersionString() => $"{Application}:{ApplicationVersion}";
     }
 }

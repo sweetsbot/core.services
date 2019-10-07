@@ -112,12 +112,14 @@ namespace Core.Services
         {
             var claims = new[]
             {
-                new Claim(CoreClaimTypes.UserName, sessionRequest.ToBlameString()),
-                new Claim(CoreClaimTypes.Application, sessionRequest.VersionString()),
+                new Claim(CoreClaimTypes.UserName, sessionRequest.UserName),
+                new Claim(CoreClaimTypes.DomainName, sessionRequest.DomainName),
+                new Claim(CoreClaimTypes.Application, sessionRequest.Application),
+                new Claim(CoreClaimTypes.ApplicationVersion, sessionRequest.ApplicationVersion.ToString()),
                 new Claim(CoreClaimTypes.Department, sessionRequest.Department),
                 new Claim(CoreClaimTypes.MachineName, sessionRequest.MachineName),
                 new Claim(CoreClaimTypes.Session, Random.Next().ToString(), ClaimValueTypes.Integer64),
-                new Claim(CoreClaimTypes.Role, "Developer"),
+//                new Claim(CoreClaimTypes.Role, "Developer"),
                 new Claim(CoreClaimTypes.Role, "User"),
             };
             var credentials = new SigningCredentials(SecurityKey, SecurityAlgorithms.HmacSha256);
