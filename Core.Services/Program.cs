@@ -13,6 +13,7 @@ namespace Core.Services
     {
         public static async Task Main(string[] args)
         {
+            System.Threading.ThreadPool.SetMinThreads(25, 25);
             await CreateHostBuilder(args).Build().RunAsync();
         }
 

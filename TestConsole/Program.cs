@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
@@ -58,6 +59,9 @@ namespace TestConsole
                             break;
                         case '5':
                             exiting = true;
+                            break;
+                        case '6':
+                            await GetGroupConfigRude(client, token);
                             break;
                     }
                 }
@@ -122,7 +126,7 @@ namespace TestConsole
                 var headers = GetHeaders(token);
                 Console.Write("Key? ");
                 var keyName = Console.ReadLine();
-                var resp = await client.GetSettingAsync("key", headers);
+                var resp = await client.GetSettingAsync(keyName, headers);
                 Console.WriteLine($"Recieved: {resp.Key}::{resp.Value}::{resp.Type}");
             }
             catch (Exception ex)
@@ -142,6 +146,35 @@ namespace TestConsole
                 var resp = await client.GetGroupConfigAsync(keyName, headers);
                 foreach (var (index, setting) in resp.Settings.Select((p, i) => (i, p)))
                     Console.WriteLine($"{index} => {setting.Key} [{setting.Value}({setting.Type})]");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error getting setting.{Environment.NewLine}{ex}");
+            }
+        }
+
+        private static async Task GetGroupConfigRude(Core.Services.Config.ConfigClient client, string token)
+        {
+            Console.WriteLine("Getting group key setting...");
+            try
+            {
+                var headers = GetHeaders(token);
+                Console.Write("Group? ");
+                var keyName = Console.ReadLine();
+                Console.Write("Rudness? ");
+                var rudeness = Console.ReadLine();
+                if(!int.TryParse(rudeness, out var loops))
+                {
+                    loops = 10;
+                }
+                var sw = Stopwatch.StartNew();
+                for (int i = 0; i < loops; i++)
+                {
+                    await client.GetGroupConfigAsync(keyName, headers);
+                    Console.Write('.');
+                }
+                sw.Stop();
+                Console.WriteLine($"\n {sw.Elapsed} Done.");
             }
             catch (Exception ex)
             {

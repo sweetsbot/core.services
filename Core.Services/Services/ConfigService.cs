@@ -44,11 +44,11 @@ namespace Core.Services
         }
 
         [Authorize]
-        public override Task<Empty> ResetCache(Empty _, ServerCallContext context)
+        public override async Task<Empty> ResetCache(Empty _, ServerCallContext context)
         {
             var user = context.GetHttpContext().User;
-            _logger.LogDebug($"{user.Identity.Name} has requested a cache reset.");
-            return Task.FromResult(new Empty());
+            await _manager.ResetCacheAsync(user);
+            return new Empty();
         }
 
         [Authorize]

@@ -131,7 +131,7 @@ namespace Core.Business
             {
                 _logger.LogDebug("Connected to cache for reset.");
                 var keys = await _cacheClient.Db0.SearchKeysAsync(
-                    $"ConfigEntry:{_env.EnvironmentName}:*");
+                    $"{Prefix}:{_env.EnvironmentName}:*");
                 var batches = keys
                     .Select((k, i) => new {Key = (RedisKey) k, Index = i})
                     .GroupBy(k => k.Index % 500, k => k.Key)

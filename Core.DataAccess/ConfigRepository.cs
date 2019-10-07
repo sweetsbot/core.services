@@ -48,7 +48,7 @@ namespace Core.DataAccess
                         pdomainname = domainName,
                         pusername = userName
                     },
-                    commandTimeout: 20,
+                    commandTimeout: 120,
                     commandType: CommandType.StoredProcedure);
                 return values.AsList();
             }
@@ -65,11 +65,12 @@ namespace Core.DataAccess
                     new
                     {
                         penvironment = environment,
-                        papplication = application,
+                        papplication =
+                        application,
                         pdomainname = domainName,
                         pusername = userName
                     },
-                    commandTimeout: 20,
+                    commandTimeout: 120,
                     commandType: CommandType.StoredProcedure);
                 return values.AsList();
             }
@@ -92,7 +93,7 @@ namespace Core.DataAccess
                         pusername = userName,
                         pconfigkeyname = configKeyName
                     },
-                    commandTimeout: 20,
+                    commandTimeout: 120,
                     commandType: CommandType.StoredProcedure);
                 return entry;
             }
@@ -115,7 +116,7 @@ namespace Core.DataAccess
                         pusername = userName,
                         pconfigkeyname = configKeyName
                     },
-                    commandTimeout: 20,
+                    commandTimeout: 120,
                     commandType: CommandType.StoredProcedure);
                 return entry;
             }
@@ -136,7 +137,7 @@ namespace Core.DataAccess
                         pusername = userName,
                         pconfiggroupname = groupName,
                     },
-                    commandTimeout: 20,
+                    commandTimeout: 120,
                     commandType: CommandType.StoredProcedure);
                 return values.AsList();
             }
@@ -157,7 +158,7 @@ namespace Core.DataAccess
                         pusername = null as string,
                         pconfiggroupname = groupName,
                     },
-                    commandTimeout: 20,
+                    commandTimeout: 120,
                     commandType: CommandType.StoredProcedure);
                 return values.AsList();
             }
@@ -176,7 +177,7 @@ namespace Core.DataAccess
                         pdomainname = domainName,
                         pusername = userName,
                     },
-                    commandTimeout: 20,
+                    commandTimeout: 120,
                     commandType: CommandType.StoredProcedure);
                 return entry.AsList();
             }
@@ -195,7 +196,7 @@ namespace Core.DataAccess
                         pdomainname = domainName,
                         pusername = userName,
                     },
-                    commandTimeout: 20,
+                    commandTimeout: 120,
                     commandType: CommandType.StoredProcedure);
                 return entry.AsList();
             }
@@ -219,7 +220,7 @@ namespace Core.DataAccess
                         pusername = userName,
                         pconfigkeyname = configKeyName
                     },
-                    commandTimeout: 20,
+                    commandTimeout: 120,
                     commandType: CommandType.StoredProcedure);
                 return entry;
             }
@@ -242,7 +243,7 @@ namespace Core.DataAccess
                         pusername = userName,
                         pconfigkeyname = configKeyName
                     },
-                    commandTimeout: 20,
+                    commandTimeout: 120,
                     commandType: CommandType.StoredProcedure);
                 return entry;
             }
