@@ -48,7 +48,8 @@ namespace Core.Business
             $"{clientData.Identity.Name}{(!string.IsNullOrEmpty(suffix) ? ":" + suffix : "")}";
 
         private async Task<IEnumerable<TCollection>> GetCachedRawAsync<TCollection>(string cacheKey,
-            Func<Task<IEnumerable<TCollection>>> lookup)
+            Func<Task<IEnumerable<TCollection>>> lookup) 
+            where TCollection : IConfigEntry
         {
             if (lookup == null) throw new ArgumentNullException(nameof(lookup));
             if (string.IsNullOrEmpty(cacheKey))
@@ -56,13 +57,18 @@ namespace Core.Business
             try
             {
                 _logger.LogTrace($"Connected to cache for key {cacheKey}");
-                var entry = await _cacheClient.Db0.GetAsync<List<TCollection>>(cacheKey, CommandFlags.PreferSlave);
-                if (entry != null) return entry;
+                var keys = await _cacheClient.Db0.GetAsync<List<string>>(cacheKey, CommandFlags.PreferSlave);
+                if (keys != null)
+                {
+                    var entries = await _cacheClient.Db0.GetAllAsync<TCollection>(keys);
+                    return entries.Values;
+                }
+
                 _logger.LogTrace($"Cache miss for key {cacheKey}");
-                entry = (await lookup()).ToList();
-                await _cacheClient.Db0.AddAsync(cacheKey, entry, TimeSpan.FromHours(24), When.NotExists,
+                var rawEntries = (await lookup()).ToList();
+                await _cacheClient.Db0.AddAsync(cacheKey, rawEntries.Select(p => p.ConfigKeyName), TimeSpan.FromHours(24), When.NotExists,
                     CommandFlags.DemandMaster);
-                return entry;
+                return rawEntries;
             }
             catch (Exception ex)
             {
