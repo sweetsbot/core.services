@@ -45,7 +45,7 @@ namespace Core.Services
             return new ConfigBlob {Settings = {entries.Select(Setting.FromEntry)}};
         }
 
-        [Authorize]
+        [Authorize(Roles = "Developer,AllTasks")]
         public override async Task<Empty> ResetCache(Empty _, ServerCallContext context)
         {
             try
