@@ -32,17 +32,17 @@ namespace Core.Business
             this._logger = logger;
         }
 
-        public string Prefix { get; set; } = "ConfigEntry";
+        public string Prefix { get; set; } = "ConfigService";
         public string Environment => _env.EnvironmentName;
         
-        public Task<ConfigEntrySlim> GetSettingAsync(ClaimsPrincipal user, string key) =>
-            GetCachedRawAsync(GetCacheKeyBase(user, key), () => _configManager.GetSettingAsync(user, key));
+        public async Task<ConfigEntrySlim> GetSettingAsync(ClaimsPrincipal user, string key) =>
+            await GetCachedRawAsync(user, key, () => _configManager.GetSettingAsync(user, key));
 
-        public Task<IEnumerable<ConfigEntrySlim>> GetGroupConfigurationAsync(ClaimsPrincipal user, string groupName) =>
-            GetCachedRawAsync(GetCacheKeyBase(user, groupName), () => _configManager.GetGroupConfigurationAsync(user, groupName));
+        public async Task<IEnumerable<ConfigEntrySlim>> GetGroupConfigurationAsync(ClaimsPrincipal user, string groupName) =>
+            await GetCachedRawAsync(user, $"__group_{groupName}", () => _configManager.GetGroupConfigurationAsync(user, groupName));
 
-        public Task<IEnumerable<ConfigEntrySlim>> GetUserConfigurationAsync(ClaimsPrincipal user) =>
-            GetCachedRawAsync(GetCacheKeyBase(user), () => _configManager.GetUserConfigurationAsync(user));
+        public async Task<IEnumerable<ConfigEntrySlim>> GetUserConfigurationAsync(ClaimsPrincipal user) =>
+            await GetCachedRawAsync(user, "__user", () => _configManager.GetUserConfigurationAsync(user));
 
         public async Task ResetCacheAsync(ClaimsPrincipal user)
         {
@@ -70,33 +70,27 @@ namespace Core.Business
         
         Task IConfigManager.AddSettingAsync(ClaimsPrincipal user, SetSetting request) => _configManager.AddSettingAsync(user, request);
         
-        private static string BuildCacheKey(params object[] parts) => string.Join(":", parts);
-        private string GetCacheKeyBase(ClaimsPrincipal c) => 
-            BuildCacheKey(Prefix, Environment, c.Application(), c.DomainName(), c.UserName());
+        private static string BuildCacheKey(params object[] parts) => string.Join(":", parts).ToLowerInvariant();
         private string GetCacheKeyBase(ClaimsPrincipal c, string suffix) => 
             BuildCacheKey(Prefix, Environment, c.Application(), c.DomainName(), c.UserName(), suffix);
-        private async Task<IEnumerable<TCollection>> GetCachedRawAsync<TCollection>(string cacheKey,
-            Func<Task<IEnumerable<TCollection>>> lookup)
-            where TCollection : IConfigEntry
+        private async Task<ConfigEntrySlim> GetCachedRawAsync(ClaimsPrincipal user, string name, Func<Task<ConfigEntrySlim>> lookup)
         {
-            if (lookup == null) throw new ArgumentNullException(nameof(lookup));
-            if (string.IsNullOrEmpty(cacheKey))
-                throw new ArgumentException("Value cannot be null or empty.", nameof(cacheKey));
+            Guard.ThrowIfNull(user, nameof(user));
+            Guard.ThrowIfNull(name, nameof(name));
+            Guard.ThrowIfNull(lookup, nameof(lookup));
+
             try
             {
-                _logger.LogTrace($"Connected to cache for key {cacheKey}");
-                var keys = await _cacheClient.Db0.GetAsync<List<string>>(cacheKey, CommandFlags.PreferSlave);
-                if (keys != null)
+                var key = GetCacheKeyBase(user, name);
+                _logger.LogTrace($"Looking for cache key {key}");
+                var entry = await _cacheClient.Db0.GetAsync<ConfigEntrySlim>(key);
+                if (entry is null)
                 {
-                    var entries = await _cacheClient.Db0.GetAllAsync<TCollection>(keys);
-                    return entries.Values;
+                    _logger.LogTrace($"Cache miss for cache key {key}");
+                    entry = await lookup();
+                    await _cacheClient.Db0.AddAsync(key, entry, When.NotExists);
                 }
-
-                _logger.LogTrace($"Cache miss for key {cacheKey}");
-                var rawEntries = (await lookup()).ToList();
-                await _cacheClient.Db0.AddAsync(cacheKey, rawEntries.Select(p => p.ConfigKeyName), TimeSpan.FromHours(24), When.NotExists,
-                    CommandFlags.DemandMaster);
-                return rawEntries;
+                return entry;
             }
             catch (Exception ex)
             {
@@ -106,27 +100,34 @@ namespace Core.Business
                 }
 
                 _logger?.LogError(ex, $"Failed to use cache due to {ex.GetType()}::{ex}");
-                var entry = await lookup();
-                return entry;
+                return await lookup();
             }
         }
 
-        private async Task<TResult> GetCachedRawAsync<TResult>(string cacheKey, Func<Task<TResult>> lookup)
+        private async Task<IEnumerable<ConfigEntrySlim>> GetCachedRawAsync(ClaimsPrincipal user, string name, Func<Task<IEnumerable<ConfigEntrySlim>>> lookup)
         {
-            if (typeof(TResult).IsInterface || typeof(TResult).IsAbstract)
-                throw new ArgumentException("Cannot deserialize interface types via cache.");
-            if (lookup == null) throw new ArgumentNullException(nameof(lookup));
-            if (string.IsNullOrEmpty(cacheKey))
-                throw new ArgumentException("Value cannot be null or empty.", nameof(cacheKey));
+            Guard.ThrowIfNull(user, nameof(user));
+            Guard.ThrowIfNull(name, nameof(name));
+            Guard.ThrowIfNull(lookup, nameof(lookup));
+
             try
             {
-                _logger.LogTrace($"Connected to cache for key {cacheKey}");
-                var entry = await _cacheClient.Db0.GetAsync<TResult>(cacheKey, CommandFlags.PreferSlave);
-                if (entry != null) return entry;
-                _logger.LogTrace($"Cache miss for key {cacheKey}");
-                entry = await lookup();
-                await _cacheClient.Db0.AddAsync(cacheKey, entry, TimeSpan.FromHours(24), When.NotExists);
-                return entry;
+                IEnumerable<ConfigEntrySlim> values = null;
+                var key = GetCacheKeyBase(user, name);
+                var keys = await _cacheClient.Db0.GetAsync<string[]>(key);
+                if (keys is null)
+                {
+                    values = await lookup();
+                    keys = values.Select(p => GetCacheKeyBase(user, p.ConfigKeyName)).ToArray();
+                    await _cacheClient.Db0.AddAsync(key, keys, When.NotExists);
+                    await Task.WhenAll(values.Select(p => _cacheClient.Db0.AddAsync(GetCacheKeyBase(user, p.ConfigKeyName), p, When.NotExists)));
+                }
+                else
+                {
+                    var map = await _cacheClient.Db0.GetAllAsync<ConfigEntrySlim>(keys);
+                    values = map.Values;
+                }
+                return values;
             }
             catch (Exception ex)
             {
@@ -134,10 +135,8 @@ namespace Core.Business
                 {
                     ex = aggEx.InnerExceptions.First(p => p is RedisConnectionException);
                 }
-
                 _logger?.LogError(ex, $"Failed to use cache due to {ex.GetType()}::{ex}");
-                var entry = await lookup();
-                return entry;
+                return await lookup();
             }
         }
     }

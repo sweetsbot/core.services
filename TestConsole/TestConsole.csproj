@@ -1,14 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <LangVersion>latest</LangVersion>
+        <LangVersion>8</LangVersion>
         <TargetFramework>netcoreapp3.0</TargetFramework>
         <OutputType>Exe</OutputType>
         <Platforms>AnyCPU;x64</Platforms>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Grpc.Net.Client" Version="2.24.0-pre1" />
+      <PackageReference Include="Grpc.Net.Client" Version="2.24.0" />
     </ItemGroup>
 
     <ItemGroup>
