@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Core.Business.Extensions;
 using Core.Common;
 using Core.Entities;
 using Microsoft.Extensions.Hosting;

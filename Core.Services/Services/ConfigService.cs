@@ -3,6 +3,7 @@ using System.Linq;
 using System.Security;
 using System.Threading.Tasks;
 using Core.Business;
+using Core.Business.Extensions;
 using Core.Common;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
@@ -14,19 +15,19 @@ namespace Core.Services
     public class ConfigService : Config.ConfigBase
     {
         private readonly ILogger<ConfigService> _logger;
-        private readonly IConfigManager _manager;
+        private readonly IConfigManager _configManager;
 
-        public ConfigService(ILogger<ConfigService> logger, IConfigManager manager)
+        public ConfigService(ILogger<ConfigService> logger, IConfigManager configManager)
         {
             _logger = logger;
-            _manager = manager;
+            _configManager = configManager;
         }
 
         [Authorize]
         public override async Task<Setting> GetSetting(Key request, ServerCallContext context)
         {
             var user = context.GetHttpContext().User;
-            var entry = await _manager.GetSettingAsync(user, request.Value);
+            var entry = await _configManager.GetSettingAsync(user, request.Value);
             return entry == null ? Setting.Null(request) : Setting.FromEntry(entry);
         }
 
@@ -41,7 +42,7 @@ namespace Core.Services
         public override async Task<ConfigBlob> GetUserConfig(Empty _, ServerCallContext context)
         {
             var user = context.GetHttpContext().User;
-            var entries = await _manager.GetUserConfigurationAsync(user);
+            var entries = await _configManager.GetUserConfigurationAsync(user);
             return new ConfigBlob {Settings = {entries.Select(Setting.FromEntry)}};
         }
 
@@ -51,13 +52,8 @@ namespace Core.Services
             try
             {
                 var user = context.GetHttpContext().User;
-                _logger.LogDebug($"User {user.ToBlameString()} wants to reset the cache.");
-                if (!user.IsInRole("Developer") && !user.IsInRole("AllTasks"))
-                {
-                    _logger.LogWarning($"User {user.ToBlameString()} is not permitted to reset the cache.");
-                    throw new SecurityException($"User {user.ToBlameString()} is not permitted to reset the cache.");
-                }
-                await _manager.ResetCacheAsync(user);
+                _logger.LogInformation($"User {user.ToBlameString()} is resetting the cache.");
+                await _configManager.ResetCacheAsync(user);
                 return new Empty();
             }
             catch (Exception ex) when (!(ex is RpcException))
@@ -72,7 +68,7 @@ namespace Core.Services
         {
             var user = context.GetHttpContext().User;
             _logger.LogDebug($"{user.Identity.Name} has requested a group of settings.");
-            var entries = await _manager.GetGroupConfigurationAsync(user, request.Value);
+            var entries = await _configManager.GetGroupConfigurationAsync(user, request.Value);
             return new ConfigBlob {Settings = {entries.Select(Setting.FromEntry)}};
         }
     }

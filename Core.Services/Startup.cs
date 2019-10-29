@@ -47,6 +47,8 @@ namespace Core.Services
                     policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
                     policy.RequireClaim(CoreClaimTypes.UserName);
                     policy.RequireClaim(CoreClaimTypes.Session);
+                    policy.RequireClaim(CoreClaimTypes.DomainName);
+                    policy.RequireClaim(CoreClaimTypes.Application);
                 });
             });
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -72,7 +74,7 @@ namespace Core.Services
         {
             builder.RegisterModule(new RedisModule {RedisConfiguration = Configuration.GetSection("Redis").Get<RedisConfiguration>()});
             builder.RegisterModule(new DataAccessModule {CoreConnectionString = Configuration.GetConnectionString("PostgresCore")});
-            builder.RegisterModule(new BusinessModule() {SecretKey = "secretKey"});
+            builder.RegisterModule(new BusinessModule {SecretKey = Configuration.GetValue<string>("SecretKey")});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

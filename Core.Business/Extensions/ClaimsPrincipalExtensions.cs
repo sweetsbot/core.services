@@ -1,9 +1,8 @@
 using System;
-using System.Linq;
 using System.Security.Claims;
 using Core.Common;
 
-namespace Core.Business
+namespace Core.Business.Extensions
 {
     public static class ClaimsPrincipalExtensions
     {
@@ -13,7 +12,6 @@ namespace Core.Business
             principal.FindFirst(CoreClaimTypes.DomainName)?.Value ?? "Unknown";
         public static string UserName(this ClaimsPrincipal principal) => 
             principal.FindFirst(CoreClaimTypes.UserName)?.Value ?? "Unknown";
-
         public static string ToBlameString(this ClaimsPrincipal principal)
         {
             var domain = principal.FindFirst(CoreClaimTypes.DomainName);
