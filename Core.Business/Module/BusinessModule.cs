@@ -1,13 +1,6 @@
 using Autofac;
 using Core.Common;
 using Core.Encryption;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using StackExchange.Redis.Extensions.Core;
-using StackExchange.Redis.Extensions.Core.Abstractions;
-using StackExchange.Redis.Extensions.Core.Configuration;
-using StackExchange.Redis.Extensions.Core.Implementations;
-using StackExchange.Redis.Extensions.Newtonsoft;
 
 namespace Core.Business.Module
 {
@@ -23,13 +16,19 @@ namespace Core.Business.Module
                 .As<IEncryptionProvider>()
                 .InstancePerDependency();
             builder.RegisterType<ConfigManager>()
-                .Named<IConfigManager>("RawAccess")
+                .Named<IConfigManager>("DatabaseConfig")
                 .InstancePerDependency();
             builder.RegisterType<CacheConfigManager>()
                 .WithParameter(
                     (info, context) => info.ParameterType == typeof(IConfigManager),
-                    (info, context) => context.ResolveNamed<IConfigManager>("RawAccess"))
-                .As<IConfigManager>()
+                    (info, context) => context.ResolveNamed<IConfigManager>("DatabaseConfig"))
+                .Named<IConfigManager>("CachedConfig")
+                .InstancePerDependency();
+            builder.RegisterType<EncryptionConfigManager>()
+                .WithParameter(
+                    (info, context) => info.ParameterType == typeof(IConfigManager),
+                    (info, context) => context.ResolveNamed<IConfigManager>("CachedConfig"))
+                .AsImplementedInterfaces()
                 .InstancePerDependency();
         }
     }

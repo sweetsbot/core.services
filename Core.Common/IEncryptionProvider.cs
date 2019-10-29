@@ -4,5 +4,7 @@ namespace Core.Common
     {
         string Encrypt(string value);
         string Decrypt(string encryptedValue);
+        bool TryEncrypt(string value, out string encryptedValue);
+        bool TryDecrypt(string encryptedValue, out string decryptedValue);
     }
 }

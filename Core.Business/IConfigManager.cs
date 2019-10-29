@@ -8,12 +8,6 @@ namespace Core.Business
 {
     public interface IConfigManager
     {
-        Task<ConfigEntrySlim> GetRawSettingAsync(ClaimsPrincipal user, string key);
-
-        Task<IEnumerable<ConfigEntrySlim>> GetRawGroupConfigurationAsync(ClaimsPrincipal user,
-            string groupName);
-
-        Task<IEnumerable<ConfigEntrySlim>> GetRawUserConfigurationAsync(ClaimsPrincipal user);
         Task ResetCacheAsync(ClaimsPrincipal user);
         Task<ConfigEntrySlim> GetSettingAsync(ClaimsPrincipal user, string key);
         Task<IEnumerable<ConfigEntrySlim>> GetUserConfigurationAsync(ClaimsPrincipal user);
