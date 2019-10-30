@@ -56,9 +56,11 @@ namespace Core.Encryption
             aes.IV = iv.ToArray();
             using var decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
             using var result = new MemoryStream();
-            using var aesStream = new Crypto.CryptoStream(result, decryptor, Crypto.CryptoStreamMode.Write);
-            using var original = new MemoryStream(encrypted.ToArray());
-            original.CopyTo(aesStream);
+            using (var aesStream = new Crypto.CryptoStream(result, decryptor, Crypto.CryptoStreamMode.Write))
+            {
+                using var original = new MemoryStream(encrypted.ToArray());
+                original.CopyTo(aesStream);
+            }
             return Encoding.UTF8.GetString(result.ToArray());
         }
 

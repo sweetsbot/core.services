@@ -306,7 +306,7 @@ namespace Core.DataAccess
             }
         }
 
-        public ConfigEntry InsertConfigEntry(ConfigEntry entry)
+        public ConfigEntry InsertOrUpdateConfigEntry(ConfigEntry entry)
         {
             using (var conn = GetConnection())
             {
@@ -441,9 +441,9 @@ namespace Core.DataAccess
             }
         }
 
-        public async Tpl.Task<ConfigEntry> InsertConfigEntryAsync(ConfigEntry entry)
+        public async Tpl.Task<ConfigEntry> InsertOrUpdateConfigEntryAsync(ConfigEntry entry)
         {
-            using (var conn = GetConnection())
+            using (var conn = await GetConnectionAsync())
             {
                 var configEntryId = await conn.ExecuteScalarAsync<int>(Constants.Sql.StoredProcInsertConfigEntry,
                     new

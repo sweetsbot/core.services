@@ -66,6 +66,8 @@ namespace Core.Business
 
                 _logger?.LogError(ex, $"Failed to use cache due to {ex.GetType()}::{ex}");
             }
+
+            await _innerManager.ResetCacheAsync(user);
         }
         Task IConfigManager.AddSettingAsync(ClaimsPrincipal user, SetSetting request) => _innerManager.AddSettingAsync(user, request);
         private static string BuildCacheKey(params object[] parts) => string.Join(":", parts).ToLowerInvariant();

@@ -44,6 +44,8 @@ namespace Core.Business
 
         public Task AddSettingAsync(ClaimsPrincipal user, SetSetting request)
         {
+            if (request.Encrypt && request.Type != SettingType.Null)
+                request.Value = _encryptor.Encrypt(request.Value);
             return _configManager.AddSettingAsync(user, request);
         }
     }

@@ -47,19 +47,23 @@ namespace Core.Business
                 user.UserName(),
                 groupName);
         
-        public  Task AddSettingAsync(ClaimsPrincipal user, SetSetting request)
+        public async Task AddSettingAsync(ClaimsPrincipal user, SetSetting request)
         {
-//            if (!await _configRepository.ConfigKeyExistsAsync(request.Key))
-//            {
-//                var key = new ConfigKey
-//                {
-//                    ConfigKeyName = request.Key, Active = true, CreatedAt = DateTime.UtcNow,
-//                    CreatedBy = user.Identity.Name
-//                };
-//                // TODO: Insert setting or update value
-////                await configDal.InsertConfigKeyAsync();
-//            }
-            return Task.CompletedTask;
+            var entry = new ConfigEntry
+            {
+                ConfigKeyName = request.Key,
+                IsEncrypted = request.Encrypt,
+                ConfigValue = request.Type == SettingType.Null ? null : request.Value,
+                ConfigValueType = request.Type.ToConfigValueType(),
+                Application = string.IsNullOrEmpty(request.Application) ? null : request.Application,
+                DomainName = string.IsNullOrEmpty(request.Domain) ? null : request.Domain,
+                Environment = string.IsNullOrEmpty(request.Environment) ? _env.EnvironmentName : request.Environment,
+                UserName = string.IsNullOrEmpty(request.UserName) ? null : request.UserName,
+                Active = true,
+                CreatedBy = user.ToBlameString(),
+                UpdatedBy = user.ToBlameString(),
+            };
+            await _configRepository.InsertOrUpdateConfigEntryAsync(entry);
         }
     }
 }

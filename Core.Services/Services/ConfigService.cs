@@ -32,10 +32,19 @@ namespace Core.Services
         }
 
         [Authorize]
-        public override Task<BoolValue> AddSetting(SetSetting request, ServerCallContext context)
+        public override async Task<BoolValue> AddSetting(SetSetting request, ServerCallContext context)
         {
-//            var user = context.GetHttpContext().User;
-            return Task.FromResult(new BoolValue() {Value = false});
+            try
+            {
+                var user = context.GetHttpContext().User;
+                await _configManager.AddSettingAsync(user, request);
+                return new BoolValue {Value = true};
+            }
+            catch (Exception ex) when (!(ex is RpcException))
+            {
+                _logger.LogError(ex, "Failed to add an entry to config.");
+                throw new RpcException(new Status(StatusCode.PermissionDenied, ex.Message));
+            }
         }
 
         [Authorize]

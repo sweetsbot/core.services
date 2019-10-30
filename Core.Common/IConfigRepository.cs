@@ -71,7 +71,7 @@ namespace Core.Common
         ConfigKey GetConfigKeyById(int configKeyId);
         ConfigKey GetConfigKeyByName(string configKeyName);
         ConfigEntry GetConfigEntryById(int configEntryId);
-        ConfigEntry InsertConfigEntry(ConfigEntry entry);
+        ConfigEntry InsertOrUpdateConfigEntry(ConfigEntry entry);
         ConfigEntry UpdateConfigEntry(ConfigEntry entry);
         void DeleteConfigEntry(int configEntryId);
         void DeleteConfigEntry(ConfigEntry entry);
@@ -83,7 +83,7 @@ namespace Core.Common
         Task<ConfigKey> GetConfigKeyByIdAsync(int configKeyId);
         Task<ConfigKey> GetConfigKeyByNameAsync(string configKeyName);
         Task<ConfigEntry> GetConfigEntryByIdAsync(int configEntryId);
-        Task<ConfigEntry> InsertConfigEntryAsync(ConfigEntry entry);
+        Task<ConfigEntry> InsertOrUpdateConfigEntryAsync(ConfigEntry entry);
         Task<ConfigEntry> UpdateConfigEntryAsync(ConfigEntry entry);
         Task DeleteConfigEntryAsync(int configEntryId);
         Task DeleteConfigEntryAsync(ConfigEntry entry);

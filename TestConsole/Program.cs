@@ -62,6 +62,9 @@ namespace TestConsole
                     case '6':
                         await GetGroupConfigRude(client, token);
                         break;
+                    case 'a':
+                        await AddEntry(client, token);
+                        break;
                 }
             }
 
@@ -207,6 +210,42 @@ namespace TestConsole
             {
                 Console.WriteLine($"Error resetting cache.{Environment.NewLine}{ex}");
             }
+        }
+
+        private static async Task AddEntry(Core.Services.Config.ConfigClient client, string token)
+        {
+            try
+            {
+                var headers = GetHeaders(token);
+                var key = Prompt("Key? ");
+                var value = Prompt("Value? ");
+                var encryptStr = Prompt("Encrypt? ");
+                var encrypt = encryptStr.ToUpperInvariant()[0] == 'Y';
+                var typeStr = Prompt("Type? ");
+                var type = Enum.Parse<SettingType>(typeStr, true);
+                var app = Prompt("App? ");
+                var env = Prompt("Env? ");
+                var domain = Prompt("Domain? ");
+                var user = Prompt("User? ");
+                var newSetting = new SetSetting
+                {
+                    Application = app, Domain = domain, Encrypt = encrypt, Environment = env, Key = key,
+                    Type = type, UserName = user, Value = value
+                };
+                var resp = await client.AddSettingAsync(newSetting, headers);
+                Console.WriteLine("Success? {0}", resp.Value);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in adding entry.{Environment.NewLine}{ex}");
+            }
+        }
+
+        private static string Prompt(string message)
+        {
+            Console.Write(message);
+            var userInput = Console.ReadLine();
+            return userInput;
         }
     }
 }
