@@ -9,9 +9,11 @@ option csharp_namespace = "Core.Services";
 
 service Config {
     rpc GetSetting(core.config.Key) returns (core.config.Setting);
+    rpc GetSettings(core.config.Keys) returns (core.config.ConfigBlob);
     rpc AddSetting(core.config.SetSetting) returns (google.protobuf.BoolValue);
     rpc GetUserConfig(google.protobuf.Empty) returns (core.config.ConfigBlob);
     rpc ResetCache(google.protobuf.Empty) returns (google.protobuf.Empty);
     rpc GetGroupConfig(core.config.Key) returns (core.config.ConfigBlob);
+    rpc AddGroupSetting(core.config.SetGroupSetting) returns (core.config.SetGroupSettingResult);
 }
 

@@ -32,6 +32,14 @@ namespace Core.Services
         }
 
         [Authorize]
+        public override async Task<ConfigBlob> GetSettings(Keys request, ServerCallContext context)
+        {
+            var user = context.GetHttpContext().User;
+            var entries = await _configManager.GetSettingsAsync(user, request.Values);
+            return new ConfigBlob {Settings = {entries.Select(Setting.FromEntry)}};
+        }
+
+        [Authorize]
         public override async Task<BoolValue> AddSetting(SetSetting request, ServerCallContext context)
         {
             try
@@ -79,6 +87,33 @@ namespace Core.Services
             _logger.LogDebug($"{user.Identity.Name} has requested a group of settings.");
             var entries = await _configManager.GetGroupConfigurationAsync(user, request.Value);
             return new ConfigBlob {Settings = {entries.Select(Setting.FromEntry)}};
+        }
+
+        [Authorize]
+        public override async Task<SetGroupSettingResult> AddGroupSetting(SetGroupSetting request, ServerCallContext context)
+        {
+            var user = context.GetHttpContext().User;
+            SetGroupSettingResult result = null;
+            try
+            {
+                var keyStatus = (await _configManager.AddGroupConfigurationAsync(user, request)).ToArray();
+                result = new SetGroupSettingResult
+                {
+                    Success = !keyStatus.Any() || keyStatus.All(p => p.Success),
+                    GroupName = request.GroupName,
+                    Results = {keyStatus.Select(p => new SetGroupSettingKeyResult {Key = p.Key, Success = p.Success})}
+                };
+            }
+            catch
+            {
+                result = new SetGroupSettingResult
+                {
+                    Success = false,
+                    GroupName = request.GroupName
+                };
+            }
+
+            return result;
         }
     }
 }

@@ -26,15 +26,18 @@ namespace Core.Services {
           string.Concat(
             "Cgxjb25maWcucHJvdG8SCmNvcmUucHJvdG8aHmdvb2dsZS9wcm90b2J1Zi93",
             "cmFwcGVycy5wcm90bxobZ29vZ2xlL3Byb3RvYnVmL2VtcHR5LnByb3RvGhVj",
-            "b25maWdfbWVzc2FnZXMucHJvdG8yvgIKBkNvbmZpZxI0CgpHZXRTZXR0aW5n",
-            "EhAuY29yZS5jb25maWcuS2V5GhQuY29yZS5jb25maWcuU2V0dGluZxJBCgpB",
-            "ZGRTZXR0aW5nEhcuY29yZS5jb25maWcuU2V0U2V0dGluZxoaLmdvb2dsZS5w",
-            "cm90b2J1Zi5Cb29sVmFsdWUSQAoNR2V0VXNlckNvbmZpZxIWLmdvb2dsZS5w",
-            "cm90b2J1Zi5FbXB0eRoXLmNvcmUuY29uZmlnLkNvbmZpZ0Jsb2ISPAoKUmVz",
-            "ZXRDYWNoZRIWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eRoWLmdvb2dsZS5wcm90",
-            "b2J1Zi5FbXB0eRI7Cg5HZXRHcm91cENvbmZpZxIQLmNvcmUuY29uZmlnLktl",
-            "eRoXLmNvcmUuY29uZmlnLkNvbmZpZ0Jsb2JCEKoCDUNvcmUuU2VydmljZXNi",
-            "BnByb3RvMw=="));
+            "b25maWdfbWVzc2FnZXMucHJvdG8yzgMKBkNvbmZpZxI0CgpHZXRTZXR0aW5n",
+            "EhAuY29yZS5jb25maWcuS2V5GhQuY29yZS5jb25maWcuU2V0dGluZxI5CgtH",
+            "ZXRTZXR0aW5ncxIRLmNvcmUuY29uZmlnLktleXMaFy5jb3JlLmNvbmZpZy5D",
+            "b25maWdCbG9iEkEKCkFkZFNldHRpbmcSFy5jb3JlLmNvbmZpZy5TZXRTZXR0",
+            "aW5nGhouZ29vZ2xlLnByb3RvYnVmLkJvb2xWYWx1ZRJACg1HZXRVc2VyQ29u",
+            "ZmlnEhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5GhcuY29yZS5jb25maWcuQ29u",
+            "ZmlnQmxvYhI8CgpSZXNldENhY2hlEhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5",
+            "GhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5EjsKDkdldEdyb3VwQ29uZmlnEhAu",
+            "Y29yZS5jb25maWcuS2V5GhcuY29yZS5jb25maWcuQ29uZmlnQmxvYhJTCg9B",
+            "ZGRHcm91cFNldHRpbmcSHC5jb3JlLmNvbmZpZy5TZXRHcm91cFNldHRpbmca",
+            "Ii5jb3JlLmNvbmZpZy5TZXRHcm91cFNldHRpbmdSZXN1bHRCEKoCDUNvcmUu",
+            "U2VydmljZXNiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, global::Core.Common.ConfigMessagesReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null));

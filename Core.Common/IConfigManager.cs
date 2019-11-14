@@ -15,8 +15,10 @@ namespace Core.Business
         /// <returns></returns>
         Task ResetCacheAsync(ClaimsPrincipal user);
         Task<ConfigEntrySlim> GetSettingAsync(ClaimsPrincipal user, string key);
+        Task<IEnumerable<ConfigEntrySlim>> GetSettingsAsync(ClaimsPrincipal user, IEnumerable<string> keys);
         Task<IEnumerable<ConfigEntrySlim>> GetUserConfigurationAsync(ClaimsPrincipal user);
         Task<IEnumerable<ConfigEntrySlim>> GetGroupConfigurationAsync(ClaimsPrincipal user, string groupName);
-        Task AddSettingAsync(ClaimsPrincipal user, SetSetting request);
+        Task<bool> AddSettingAsync(ClaimsPrincipal user, SetSetting request);
+        Task<IEnumerable<(string Key, bool Success)>> AddGroupConfigurationAsync(ClaimsPrincipal user, SetGroupSetting groupConfig);
     }
 }

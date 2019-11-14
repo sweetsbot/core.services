@@ -1,3 +1,5 @@
 [] Add "Add to Group"
-[] Move decryption to new ConfigManager
-[] wire up decryption manager
+    [] Group Name
+    [] Message allows ConfigKeyName or ConfigKeyId
+[x] Move decryption to new ConfigManager
+[x] wire up decryption manager

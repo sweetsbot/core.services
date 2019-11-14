@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using Core.Business.Extensions;
 using Core.Common;
@@ -16,7 +18,7 @@ namespace Core.Business
     public class CacheConfigManager : IConfigManager
     {
         private readonly IRedisCacheClient _cacheClient;
-        private readonly IConfigManager _innerManager;
+        private readonly IConfigManager _configManager;
         private readonly ILogger<CacheConfigManager> _logger;
         private readonly IHostEnvironment _env;
 
@@ -27,7 +29,7 @@ namespace Core.Business
             ILogger<CacheConfigManager> logger = null)
         {
             this._env = env ?? throw new ArgumentNullException(nameof(env));
-            this._innerManager = innerManager ?? throw new ArgumentNullException(nameof(innerManager));
+            this._configManager = innerManager ?? throw new ArgumentNullException(nameof(innerManager));
             this._cacheClient = cacheClient ?? throw new ArgumentNullException(nameof(cacheClient));
             this._logger = logger;
         }
@@ -37,13 +39,36 @@ namespace Core.Business
         private IRedisDatabase Cache => _cacheClient.GetDbFromConfiguration();
         
         public async Task<ConfigEntrySlim> GetSettingAsync(ClaimsPrincipal user, string key) =>
-            await GetCachedRawAsync(user, key, () => _innerManager.GetSettingAsync(user, key));
+            await GetCachedRawAsync(user, key, () => _configManager.GetSettingAsync(user, key));
+
+        public async Task<IEnumerable<ConfigEntrySlim>> GetSettingsAsync(ClaimsPrincipal user, IEnumerable<string> keys)
+        {
+            using var sha256 = SHA256.Create();
+            var providedKeys = keys.ToArray();
+            var onDemandGroupName = Convert.ToBase64String(sha256.ComputeHash(Encoding.UTF8.GetBytes(string.Join("|", providedKeys))));
+            return await GetCachedRawAsync(user, $"__group_od{onDemandGroupName}", 
+                () => _configManager.GetSettingsAsync(user, providedKeys));
+        }
 
         public async Task<IEnumerable<ConfigEntrySlim>> GetGroupConfigurationAsync(ClaimsPrincipal user, string groupName) =>
-            await GetCachedRawAsync(user, $"__group_{groupName}", () => _innerManager.GetGroupConfigurationAsync(user, groupName));
+            await GetCachedRawAsync(user, $"__group_{groupName}", () => _configManager.GetGroupConfigurationAsync(user, groupName));
 
         public async Task<IEnumerable<ConfigEntrySlim>> GetUserConfigurationAsync(ClaimsPrincipal user) =>
-            await GetCachedRawAsync(user, "__user", () => _innerManager.GetUserConfigurationAsync(user));
+            await GetCachedRawAsync(user, "__user", () => _configManager.GetUserConfigurationAsync(user));
+
+        public async Task<bool> AddSettingAsync(ClaimsPrincipal user, SetSetting request)
+        {
+            var result = await _configManager.AddSettingAsync(user, request);
+            await InvalidateCacheGroupsAsync();
+            return result;
+        }
+
+        public async Task<IEnumerable<(string Key, bool Success)>> AddGroupConfigurationAsync(ClaimsPrincipal user, SetGroupSetting groupConfig)
+        {
+            var results = await _configManager.AddGroupConfigurationAsync(user, groupConfig);
+            await InvalidateCacheGroupsAsync();
+            return results;
+        }
 
         public async Task ResetCacheAsync(ClaimsPrincipal user)
         {
@@ -67,9 +92,9 @@ namespace Core.Business
                 _logger?.LogError(ex, $"Failed to use cache due to {ex.GetType()}::{ex}");
             }
 
-            await _innerManager.ResetCacheAsync(user);
+            await _configManager.ResetCacheAsync(user);
         }
-        Task IConfigManager.AddSettingAsync(ClaimsPrincipal user, SetSetting request) => _innerManager.AddSettingAsync(user, request);
+
         private static string BuildCacheKey(params object[] parts) => string.Join(":", parts).ToLowerInvariant();
         private string BuildCacheKey(ClaimsPrincipal c, string suffix) => BuildCacheKey(Prefix, Environment, c.Application(), c.DomainName(), c.UserName(), suffix);
         private async Task<ConfigEntrySlim> GetCachedRawAsync(ClaimsPrincipal user, string name, Func<Task<ConfigEntrySlim>> lookup)
@@ -135,6 +160,29 @@ namespace Core.Business
                 }
                 _logger?.LogError(ex, $"Failed to use cache due to {ex.GetType()}::{ex}");
                 return await lookup();
+            }
+        }
+        private async Task InvalidateCacheGroupsAsync()
+        {
+            try
+            {
+                var search1 = Cache.SearchKeysAsync(BuildCacheKey(Prefix, Environment, "*", "__group_*"));
+                var search2 = Cache.SearchKeysAsync(BuildCacheKey(Prefix, Environment, "*", "__user"));
+                var results = await Task.WhenAll(search1, search2);
+                var batches = results.SelectMany(p => p)
+                    .Select((k, i) => (Index: i, Key: (RedisKey) k))
+                    .GroupBy(p => p.Index / 300, p => p.Key)
+                    .Select(p => Cache.Database.KeyDeleteAsync(p.ToArray(), CommandFlags.DemandMaster));
+                await Task.WhenAll(batches);
+            }
+            catch (Exception ex)
+            {
+                if (ex is AggregateException aggEx && aggEx.InnerExceptions.Any(e => e is RedisException))
+                {
+                    ex = aggEx.InnerExceptions.First(e => e is RedisException);
+                }
+                
+                _logger?.LogError(ex, $"Failed to use cache due to {ex.GetType()}::{ex}");
             }
         }
     }

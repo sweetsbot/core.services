@@ -7,6 +7,10 @@ message Key {
     string value = 1;
 }
 
+message Keys {
+    repeated string values = 1;
+}
+
 message SetSetting {
     string key = 1;
     string value = 2;
@@ -16,6 +20,22 @@ message SetSetting {
     string domain = 6;
     string userName = 7;
     bool encrypt = 8;
+}
+
+message SetGroupSetting {
+    string groupName = 1;
+    repeated string keys = 2;
+}
+
+message SetGroupSettingResult {
+    string groupName = 1;
+    repeated SetGroupSettingKeyResult results = 2;
+    bool success = 3;
+}
+
+message SetGroupSettingKeyResult {
+    string key = 1;
+    bool success = 2;
 }
 
 message ConfigBlob {

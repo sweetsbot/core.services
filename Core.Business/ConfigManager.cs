@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Core.Business.Extensions;
@@ -30,6 +31,9 @@ namespace Core.Business
                 user.UserName(),
                 key);
 
+        public async Task<IEnumerable<ConfigEntrySlim>> GetSettingsAsync(ClaimsPrincipal user, IEnumerable<string> keys) => 
+            await GetUserConfigurationAsync(user).ContinueWith(p => p.Result.Where(s => keys.Contains(s.ConfigKeyName)));
+
         Task IConfigManager.ResetCacheAsync(ClaimsPrincipal user) => Task.CompletedTask;
 
         public async Task<IEnumerable<ConfigEntrySlim>> GetUserConfigurationAsync(ClaimsPrincipal user) =>
@@ -46,8 +50,13 @@ namespace Core.Business
                 user.DomainName(),
                 user.UserName(),
                 groupName);
-        
-        public async Task AddSettingAsync(ClaimsPrincipal user, SetSetting request)
+
+        public async Task<IEnumerable<(string Key, bool Success)>> AddGroupConfigurationAsync(ClaimsPrincipal user, SetGroupSetting groupConfig)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<bool> AddSettingAsync(ClaimsPrincipal user, SetSetting request)
         {
             var entry = new ConfigEntry
             {
@@ -63,7 +72,15 @@ namespace Core.Business
                 CreatedBy = user.ToBlameString(),
                 UpdatedBy = user.ToBlameString(),
             };
-            await _configRepository.InsertOrUpdateConfigEntryAsync(entry);
+            try
+            {
+                entry = await _configRepository.InsertOrUpdateConfigEntryAsync(entry);
+                return entry != null;
+            }
+            catch (InvalidOperationException)
+            {
+                return false;
+            }
         }
     }
 }
