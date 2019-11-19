@@ -23,9 +23,11 @@ namespace Core.Business
             this._configRepository = configRepository ?? throw new ArgumentNullException(nameof(configRepository));
         }
 
+        private string Environment => _env.EnvironmentName.ToLowerInvariant();
+        
         public async Task<ConfigEntrySlim> GetSettingAsync(ClaimsPrincipal user, string key) =>
             await _configRepository.GetWeightedConfigEntryByKeyAsync(
-                _env.EnvironmentName.ToLowerInvariant(),
+                Environment,
                 user.Application(),
                 user.DomainName(),
                 user.UserName(),
@@ -38,14 +40,14 @@ namespace Core.Business
 
         public async Task<IEnumerable<ConfigEntrySlim>> GetUserConfigurationAsync(ClaimsPrincipal user) =>
             await _configRepository.GetWeightedConfigEntriesAsync(
-                _env.EnvironmentName.ToLowerInvariant(),
+                Environment,
                 user.Application(),
                 user.DomainName(),
                 user.UserName());
 
         public async Task<IEnumerable<ConfigEntrySlim>> GetGroupConfigurationAsync(ClaimsPrincipal user, string groupName) =>
             await _configRepository.GetWeightedConfigEntryByGroupAsync(
-                _env.EnvironmentName.ToLowerInvariant(),
+                Environment,
                 user.Application(),
                 user.DomainName(),
                 user.UserName(),

@@ -35,13 +35,13 @@ namespace Core.Business
         }
 
         public string Prefix { get; set; } = "ConfigService";
-        private string Environment => _env.EnvironmentName;
+        private string Environment => _env.EnvironmentName.ToLowerInvariant();
         private IRedisDatabase Cache => _cacheClient.GetDbFromConfiguration();
         
         public async Task<ConfigEntrySlim> GetSettingAsync(ClaimsPrincipal user, string key) =>
             await GetCachedRawAsync(user, key, () => _configManager.GetSettingAsync(user, key));
 
-        public async Task<IEnumerable<ConfigEntrySlim>> GetSettingsAsync(ClaimsPrincipal user, IEnumerable<string> keys)
+        public async Task<IEnumerable<ConfigEntrySlim>> GetSettingsAsync(ClaimsPrincipal user, IEnumerable<string> keys) 
         {
             using var sha256 = SHA256.Create();
             var providedKeys = keys.ToArray();
@@ -65,9 +65,16 @@ namespace Core.Business
 
         public async Task<IEnumerable<(string Key, bool Success)>> AddGroupConfigurationAsync(ClaimsPrincipal user, SetGroupSetting groupConfig)
         {
-            var results = await _configManager.AddGroupConfigurationAsync(user, groupConfig);
-            await InvalidateCacheGroupsAsync();
-            return results;
+            try
+            {
+                var results = await _configManager.AddGroupConfigurationAsync(user, groupConfig);
+                await InvalidateCacheGroupsAsync();
+                return results;
+            }
+            catch
+            {
+                return groupConfig.Keys.Select(p => (p, false)).ToArray();
+            }
         }
 
         public async Task ResetCacheAsync(ClaimsPrincipal user)
