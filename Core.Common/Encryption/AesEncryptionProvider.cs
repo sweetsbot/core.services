@@ -23,15 +23,24 @@ namespace Core.Encryption
             Array.ConstrainedCopy(hashed, 0, this._aesKey, 0, 24);
         }
 
+        public byte[] Key => _aesKey;
+
         public string Encrypt(string value)
         {
-            ReadOnlySpan<byte> decodedValue = Encoding.UTF8.GetBytes(value);
+            return Encrypt(value, _aesKey, null);
+        }
+
+        public static string Encrypt(string value, byte[] key, byte[] iv)
+        {
+            
             using var aes = Crypto.Aes.Create();
+            aes.Key = key;
+            if (iv != null) aes.IV = iv;            
+            ReadOnlySpan<byte> decodedValue = Encoding.UTF8.GetBytes(value);
             if (aes == null) throw new ArgumentException($"AES Parameter cannot be null.", nameof(aes));
-            aes.Key = _aesKey;
-            using var encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
+            using var transform = aes.CreateEncryptor(aes.Key, aes.IV);
             using var result = new MemoryStream();
-            using (var aesStream = new Crypto.CryptoStream(result, encryptor, Crypto.CryptoStreamMode.Write))
+            using (var aesStream = new Crypto.CryptoStream(result, transform, Crypto.CryptoStreamMode.Write))
             {
                 using var original = new MemoryStream(decodedValue.ToArray());
                 original.CopyTo(aesStream);
@@ -47,16 +56,21 @@ namespace Core.Encryption
 
         public string Decrypt(string encryptedValue)
         {
+            return Decrypt(encryptedValue, _aesKey);
+        }
+
+        public static string Decrypt(string encryptedValue, byte[] key)
+        {
             ReadOnlySpan<byte> combined = Convert.FromBase64String(encryptedValue);
             using var aes = Crypto.Aes.Create();
             if (aes == null) throw new ArgumentException($"AES Parameter cannot be null.", nameof(aes));
-            aes.Key = _aesKey;
+            aes.Key = key;
             var iv = combined.Slice(0, aes.IV.Length);
             var encrypted = combined.Slice(aes.IV.Length);
             aes.IV = iv.ToArray();
-            using var decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
+            using var transform = aes.CreateDecryptor(aes.Key, aes.IV);
             using var result = new MemoryStream();
-            using (var aesStream = new Crypto.CryptoStream(result, decryptor, Crypto.CryptoStreamMode.Write))
+            using (var aesStream = new Crypto.CryptoStream(result, transform, Crypto.CryptoStreamMode.Write))
             {
                 using var original = new MemoryStream(encrypted.ToArray());
                 original.CopyTo(aesStream);

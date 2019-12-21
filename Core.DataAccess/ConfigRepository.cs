@@ -522,9 +522,9 @@ namespace Core.DataAccess
         }
         #endregion
 
-        public virtual async Tpl.Task InsertOrUpdateGroup(string groupName)
+        public virtual Tpl.Task InsertOrUpdateGroup(string groupName)
         {
-
+            return Tpl.Task.CompletedTask;
         }
     }
 }

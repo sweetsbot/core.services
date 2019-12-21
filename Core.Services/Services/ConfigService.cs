@@ -73,10 +73,15 @@ namespace Core.Services
                 await _configManager.ResetCacheAsync(user);
                 return new Empty();
             }
-            catch (Exception ex) when (!(ex is RpcException))
+            catch (SecurityException ex)
             {
                 _logger.LogError(ex, "Failed to reset cache.");
                 throw new RpcException(new Status(StatusCode.PermissionDenied, ex.Message));
+            }
+            catch (Exception ex) when (!(ex is RpcException))
+            {
+                _logger.LogError(ex, "Failed to reset cache.");
+                throw new RpcException(new Status(StatusCode.Internal, ex.Message));
             }
         }
 

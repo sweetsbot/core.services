@@ -53,9 +53,9 @@ namespace Core.Business
                 user.UserName(),
                 groupName);
 
-        public async Task<IEnumerable<(string Key, bool Success)>> AddGroupConfigurationAsync(ClaimsPrincipal user, SetGroupSetting groupConfig)
+        public Task<IEnumerable<(string Key, bool Success)>> AddGroupConfigurationAsync(ClaimsPrincipal user, SetGroupSetting groupConfig)
         {
-            throw new NotImplementedException();
+            return Task.FromResult<IEnumerable<(string Key, bool Success)>>(new ValueTuple<string, bool>[0]);
         }
 
         public async Task<bool> AddSettingAsync(ClaimsPrincipal user, SetSetting request)
