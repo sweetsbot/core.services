@@ -24,13 +24,13 @@ namespace Core.Business.Extensions
             if (entry == null || !entry.IsEncrypted)
                 return entry;
 
-            if (!provider.TryDecrypt(entry.ConfigValue, out var decryptedValue))
+            if (provider.TryDecrypt(entry.ConfigValue, out var decryptedValue))
             {
-                logger?.LogError("Failed to decrypt entry that is marked as encrypted!");
+                entry.ConfigValue = decryptedValue;
             }
             else
             {
-                entry.ConfigValue = decryptedValue;
+                logger?.LogError("Failed to decrypt entry that is marked as encrypted!");
             }
 
             return entry;

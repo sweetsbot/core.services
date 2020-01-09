@@ -34,7 +34,7 @@ namespace Core.Business
                 key);
 
         public async Task<IEnumerable<ConfigEntrySlim>> GetSettingsAsync(ClaimsPrincipal user, IEnumerable<string> keys) => 
-            await GetUserConfigurationAsync(user).ContinueWith(p => p.Result.Where(s => keys.Contains(s.ConfigKeyName)));
+            await GetUserConfigurationAsync(user).ContinueWith(p => p.Result.Where(s => keys.Contains(s.ConfigKeyName, StringComparer.OrdinalIgnoreCase)));
 
         Task IConfigManager.ResetCacheAsync(ClaimsPrincipal user) => Task.CompletedTask;
 

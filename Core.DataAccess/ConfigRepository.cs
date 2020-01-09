@@ -33,6 +33,7 @@ namespace Core.DataAccess
             return connection;
         }
 
+        #region Weighted
         public virtual IEnumerable<ConfigEntrySlim> GetWeightedConfigEntries(string environment,
             string application,
             string domainName,
@@ -202,7 +203,6 @@ namespace Core.DataAccess
             }
         }
 
-
         public virtual ConfigEntry GetFullWeightedConfigEntryByKey(string environment,
             string application,
             string userName,
@@ -248,7 +248,8 @@ namespace Core.DataAccess
                 return entry;
             }
         }
-
+        #endregion
+        #region Sync
         public bool ConfigKeyExists(string configKeyName)
         {
             using (var conn = GetConnection())
@@ -384,7 +385,8 @@ namespace Core.DataAccess
                 });
             }
         }
-
+        #endregion
+        #region Async
         public async Tpl.Task<bool> ConfigKeyExistsAsync(string configKeyName)
         {
             using (var conn = GetConnection())
@@ -518,6 +520,12 @@ namespace Core.DataAccess
                     configEntryId = entry.ConfigEntryId
                 });
             }
+        }
+        #endregion
+
+        public virtual async Tpl.Task InsertOrUpdateGroup(string groupName)
+        {
+
         }
     }
 }

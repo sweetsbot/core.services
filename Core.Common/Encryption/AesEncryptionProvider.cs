@@ -41,7 +41,7 @@ namespace Core.Encryption
             var combined = new byte[aes.IV.Length + encrypted.Length];
             Array.ConstrainedCopy(aes.IV, 0, combined, 0, aes.IV.Length);
             Array.ConstrainedCopy(encrypted, 0, combined, aes.IV.Length, encrypted.Length);
-
+            
             return Convert.ToBase64String(combined);
         }
 
@@ -61,6 +61,7 @@ namespace Core.Encryption
                 using var original = new MemoryStream(encrypted.ToArray());
                 original.CopyTo(aesStream);
             }
+            
             return Encoding.UTF8.GetString(result.ToArray());
         }
 
