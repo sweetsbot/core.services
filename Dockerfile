@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /app
 
 COPY *.sln ./
@@ -28,7 +28,7 @@ RUN dotnet build -c Release -o /app/build
 
 RUN dotnet publish -c Release -o /app/out
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.0 as final
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 as final
 WORKDIR /app
 COPY --from=build /app/out .
 ENV ASPNETCORE_URLS="https://*:5001"

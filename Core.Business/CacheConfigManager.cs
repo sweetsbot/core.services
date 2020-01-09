@@ -20,7 +20,7 @@ namespace Core.Business
         private readonly IRedisCacheClient _cacheClient;
         private readonly IConfigManager _configManager;
         private readonly ILogger<CacheConfigManager> _logger;
-        private readonly IHostEnvironment _env;
+        private readonly string _env;
 
         public CacheConfigManager(
             IHostEnvironment env,
@@ -28,14 +28,14 @@ namespace Core.Business
             IRedisCacheClient cacheClient,
             ILogger<CacheConfigManager> logger = null)
         {
-            this._env = env ?? throw new ArgumentNullException(nameof(env));
+            this._env = env?.EnvironmentName?.ToLowerInvariant() ?? throw new ArgumentNullException(nameof(env));
             this._configManager = innerManager ?? throw new ArgumentNullException(nameof(innerManager));
             this._cacheClient = cacheClient ?? throw new ArgumentNullException(nameof(cacheClient));
             this._logger = logger;
         }
 
         public string Prefix { get; set; } = "ConfigService";
-        private string Environment => _env.EnvironmentName.ToLowerInvariant();
+        private string Environment => _env;
         private IRedisDatabase Cache => _cacheClient.GetDbFromConfiguration();
         
         public async Task<ConfigEntrySlim> GetSettingAsync(ClaimsPrincipal user, string key) =>

@@ -154,8 +154,8 @@ namespace Core.DataAccess
                     {
                         penvironment = environment,
                         papplication = application,
-                        pdomainname = null as string,
-                        pusername = null as string,
+                        pdomainname = domainName,
+                        pusername = userName,
                         pconfiggroupname = groupName,
                     },
                     commandTimeout: 120,
@@ -355,6 +355,7 @@ namespace Core.DataAccess
                         configEntryId = entry.ConfigEntryId
                     });
                 return conn.QuerySingle<ConfigEntry>(Constants.Sql.QueryGetConfigEntryById,
+                    
                     new
                     {
                         configEntryId = entry.ConfigEntryId

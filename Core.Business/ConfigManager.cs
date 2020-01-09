@@ -12,18 +12,18 @@ namespace Core.Business
 {
     public class ConfigManager : IConfigManager
     {
-        private readonly IHostEnvironment _env;
+        private readonly string _env;
         private readonly IConfigRepository _configRepository;
 
         public ConfigManager(
             IHostEnvironment env,
             IConfigRepository configRepository)
         {
-            this._env = env ?? throw new ArgumentNullException(nameof(env));
+            this._env = env?.EnvironmentName?.ToLowerInvariant() ?? throw new ArgumentNullException(nameof(env));
             this._configRepository = configRepository ?? throw new ArgumentNullException(nameof(configRepository));
         }
 
-        private string Environment => _env.EnvironmentName.ToLowerInvariant();
+        private string Environment => _env;
         
         public async Task<ConfigEntrySlim> GetSettingAsync(ClaimsPrincipal user, string key) =>
             await _configRepository.GetWeightedConfigEntryByKeyAsync(
@@ -51,7 +51,7 @@ namespace Core.Business
                 user.Application(),
                 user.DomainName(),
                 user.UserName(),
-                groupName);
+                groupName.ToLowerInvariant());
 
         public async Task<IEnumerable<(string Key, bool Success)>> AddGroupConfigurationAsync(ClaimsPrincipal user, SetGroupSetting groupConfig)
         {
@@ -68,7 +68,7 @@ namespace Core.Business
                 ConfigValueType = request.Type.ToConfigValueType(),
                 Application = string.IsNullOrEmpty(request.Application) ? null : request.Application,
                 DomainName = string.IsNullOrEmpty(request.Domain) ? null : request.Domain,
-                Environment = string.IsNullOrEmpty(request.Environment) ? _env.EnvironmentName : request.Environment,
+                Environment = string.IsNullOrEmpty(request.Environment) ? Environment : request.Environment,
                 UserName = string.IsNullOrEmpty(request.UserName) ? null : request.UserName,
                 Active = true,
                 CreatedBy = user.ToBlameString(),
