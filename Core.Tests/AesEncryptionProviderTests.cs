@@ -8,6 +8,7 @@ namespace Core.Tests
 {
     public class AesEncryptionProviderTests
     {
+        #region Ctor
         [Theory]
         [InlineData("secretkey", "ho8LEsB+9jB9ByG9eFEDHr1r6UQjdgOG")]
         [InlineData("magickey", "9cgRiXzwpv5J2VISsT0PWnBw/vPc3lZQ")]
@@ -38,7 +39,9 @@ namespace Core.Tests
         {
             Assert.Throws<ArgumentException>(() => new AesEncryptionProvider(null));
         }
-
+        #endregion
+        
+        #region Encrypt
         [Theory]
         [InlineData("Hello there.", "ho8LEsB+9jB9ByG9eFEDHr1r6UQjdgOG", "TQ36HLyQYwO0bYf5YFXMSw==", "bZtq3qI+hm7w9qtbijBXmQ==")]
         [InlineData("Hello there", "ho8LEsB+9jB9ByG9eFEDHr1r6UQjdgOG", "HAyLlVa32DoTiOO1b3h8Pw==", "s+6CYq3CLt3Xzrt9eMK6Vw==")]
@@ -124,5 +127,12 @@ namespace Core.Tests
             Assert.NotEmpty(result);
             Assert.True(result.Length > 16);
         }
+        #endregion
+
+        #region Decrypt
+
+        
+
+        #endregion
     }
 }
