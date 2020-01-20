@@ -16,7 +16,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1A35F41D-8832-4611-A755-E87CAF21625D}"
 	ProjectSection(SolutionItems) = preProject
 		todo.txt = todo.txt
+		global.json = global.json
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Tests", "Core.Tests\Core.Tests.csproj", "{3BF012A8-A34E-40AE-A68C-1C03A42B82C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,6 +69,14 @@ Global
 		{BD82A4EE-A01F-45C5-9514-C9E06B9D9ACD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BD82A4EE-A01F-45C5-9514-C9E06B9D9ACD}.Release|x64.ActiveCfg = Release|x64
 		{BD82A4EE-A01F-45C5-9514-C9E06B9D9ACD}.Release|x64.Build.0 = Release|x64
+		{3BF012A8-A34E-40AE-A68C-1C03A42B82C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BF012A8-A34E-40AE-A68C-1C03A42B82C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BF012A8-A34E-40AE-A68C-1C03A42B82C2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3BF012A8-A34E-40AE-A68C-1C03A42B82C2}.Debug|x64.Build.0 = Debug|Any CPU
+		{3BF012A8-A34E-40AE-A68C-1C03A42B82C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BF012A8-A34E-40AE-A68C-1C03A42B82C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BF012A8-A34E-40AE-A68C-1C03A42B82C2}.Release|x64.ActiveCfg = Release|Any CPU
+		{3BF012A8-A34E-40AE-A68C-1C03A42B82C2}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
