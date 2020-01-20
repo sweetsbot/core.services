@@ -155,8 +155,8 @@ namespace Core.DataAccess
                     {
                         penvironment = environment,
                         papplication = application,
-                        pdomainname = domainName,
-                        pusername = userName,
+                        pdomainname = null as string,
+                        pusername = null as string,
                         pconfiggroupname = groupName,
                     },
                     commandTimeout: 120,
@@ -356,7 +356,6 @@ namespace Core.DataAccess
                         configEntryId = entry.ConfigEntryId
                     });
                 return conn.QuerySingle<ConfigEntry>(Constants.Sql.QueryGetConfigEntryById,
-                    
                     new
                     {
                         configEntryId = entry.ConfigEntryId
@@ -523,9 +522,9 @@ namespace Core.DataAccess
         }
         #endregion
 
-        public virtual async Tpl.Task InsertOrUpdateGroup(string groupName)
+        public virtual Tpl.Task InsertOrUpdateGroup(string groupName)
         {
-
+            return Tpl.Task.CompletedTask;
         }
     }
 }

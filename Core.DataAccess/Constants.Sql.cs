@@ -4,33 +4,33 @@ namespace Core.DataAccess
     {
         public static class Sql
         {
-            public const string StoredProcGetConfigWeighted = "config.spgetconfigweighted";
-            public const string StoredProcGetConfigWeightedByGroup = "config.spgetconfigweightedgroup";
-            public const string StoredProcGetConfigWeightedFull = "config.spgetconfigweightedfull";
-            public const string StoredProcInsertConfigEntry = "config.spinsertentry";
+            public const string StoredProcGetConfigWeighted = "spgetconfigweighted";
+            public const string StoredProcGetConfigWeightedByGroup = "spgetconfigweightedgroup";
+            public const string StoredProcGetConfigWeightedFull = "spgetconfigweightedfull";
+            public const string StoredProcInsertConfigEntry = "spinsertentry";
 
             public const string QueryConfigKeyExists = @"
 SELECT
 CASE WHEN COUNT(ConfigKeyName) > 0 THEN TRUE ELSE FA
-FROM config.configkey
+FROM ConfigKey
 WHERE ConfigKeyName = @configKeyName
 ";
 
             public const string QueryGetAllConfigKeys = @"
 SELECT
 ConfigKeyId, ConfigKeyName, Active, CreatedBy, CreatedAt
-FROM config.configkey";
+FROM ConfigKey";
 
             public const string QueryGetConfigKeyByName = @"
 SELECT
 ConfigKeyId, ConfigKeyName, Active, CreatedBy, CreatedAt
-FROM config.configkey
+FROM ConfigKey
 WHERE ConfigKeyName = @configKeyName";
 
             public const string QueryGetConfigKeyById = @"
 SELECT
 ConfigKeyId, ConfigKeyName, Active, CreatedBy, CreatedAt
-FROM config.configkey
+FROM ConfigKey
 WHERE ConfigKeyId = @configKeyId";
 
             public const string QueryGetAllConfigEntries = @"
@@ -50,7 +50,7 @@ ce.CreatedBy,
 ce.CreatedAt,
 ce.UpdatedBy,
 ce.UpdatedAt
-FROM config.configentry ce
+FROM ConfigEntry ce
 JOIN ConfigKey c on ce.ConfigKeyId = c.ConfigKeyId";
 
             public const string QueryGetConfigEntryById = @"
@@ -70,13 +70,13 @@ ce.CreatedBy,
 ce.CreatedAt,
 ce.UpdatedBy,
 ce.UpdatedAt
-FROM config.configentry ce
-JOIN config.configkey c on ce.ConfigKeyId = c.ConfigKeyId
+FROM ConfigEntry ce
+JOIN ConfigKey c on ce.ConfigKeyId = c.ConfigKeyId
 WHERE ce.ConfigEntryId = @configEntryId";
 
 
             public const string QueryUpdateConfigEntry = @"
-UPDATE config.configentry SET
+UPDATE ConfigEntry SET
 Environment = @environment
 ,Application = @application
 ,DomainName = @domainName
@@ -93,7 +93,7 @@ Environment = @environment
 WHERE ConfigEntryId = @configEntryId";
 
             public const string QueryDeleteConfigEntry = @"
-DELETE FROM config.configentry WHERE ConfigEntryId = @configEntryId";
+DELETE FROM ConfigEntry WHERE ConfigEntryId = @configEntryId";
         }
     }
 }

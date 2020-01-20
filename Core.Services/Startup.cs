@@ -121,7 +121,7 @@ namespace Core.Services
                 new Claim(CoreClaimTypes.Department, sessionRequest.Department),
                 new Claim(CoreClaimTypes.MachineName, sessionRequest.MachineName),
                 new Claim(CoreClaimTypes.Session, Random.Next().ToString(), ClaimValueTypes.Integer64),
-                new Claim(CoreClaimTypes.Role, "Developer"),
+//                new Claim(CoreClaimTypes.Role, "Developer"),
                 new Claim(CoreClaimTypes.Role, "User"),
             };
             var credentials = new SigningCredentials(SecurityKey, SecurityAlgorithms.HmacSha256);
