@@ -1,7 +1,8 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Text;
-using Core.Common;
+using Core.Contracts;
 using Crypto = System.Security.Cryptography;
 
 namespace Core.Encryption
@@ -10,19 +11,29 @@ namespace Core.Encryption
     {
         private readonly byte[] _aesKey;
 
-        public AesEncryptionProvider(string key)
+        public AesEncryptionProvider(string key, int keyLength = 24)
         {
             if (string.IsNullOrEmpty(key))
-            {
                 throw new ArgumentException("Key must have have a valid value.", nameof(key));
-            }
-
-            _aesKey = new byte[24];
+            if (!validLengths.Contains(keyLength))
+                throw new ArgumentException("Invalid key length, key must be of sizes 16, 24 or 32", nameof(key));
             using var hash = new Crypto.SHA512CryptoServiceProvider();
             var hashed = hash.ComputeHash(Encoding.UTF8.GetBytes(key));
-            Array.ConstrainedCopy(hashed, 0, this._aesKey, 0, 24);
+            _aesKey = new byte[keyLength];
+            Array.ConstrainedCopy(hashed, 0, this._aesKey, 0, keyLength);
         }
 
+        private static int[] validLengths = new int[] { 16, 24, 32 };
+        public AesEncryptionProvider(byte[] key)
+        {
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
+            if (!validLengths.Contains(key.Length))
+                throw new ArgumentException("Invalid key length, key must be of sizes 16, 24 or 32", nameof(key));
+            _aesKey = new byte[key.Length];
+            Array.ConstrainedCopy(key, 0, this._aesKey, 0, key.Length);
+        }
+        
         public byte[] Key => _aesKey;
 
         public string Encrypt(string value)
@@ -32,7 +43,6 @@ namespace Core.Encryption
 
         public static string Encrypt(string value, byte[] key, byte[] iv)
         {
-            
             using var aes = Crypto.Aes.Create();
             aes.Key = key;
             if (iv != null) aes.IV = iv;            

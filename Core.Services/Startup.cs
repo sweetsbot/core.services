@@ -4,7 +4,7 @@ using System.Security.Claims;
 using System.Text.Json;
 using Autofac;
 using Core.Business.Module;
-using Core.Common;
+using Core.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

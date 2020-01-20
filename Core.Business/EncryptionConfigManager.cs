@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Core.Business.Extensions;
-using Core.Common;
+using Core.Contracts;
 using Core.Entities;
 using Microsoft.Extensions.Logging;
 

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Linq;
-using Core.Common;
+using Core.Contracts;
 using Core.Entities;
 using Tpl = System.Threading.Tasks;
 using Dapper;

@@ -1,17 +1,17 @@
 using System;
 using System.Security.Claims;
-using Core.Common;
+using Core.Entities;
 
-namespace Core.Business.Extensions
+namespace Core.Extensions
 {
     public static class ClaimsPrincipalExtensions
     {
         public static string Application(this ClaimsPrincipal principal) => 
-            principal.FindFirst(CoreClaimTypes.Application)?.Value ?? "Unknown";
+            principal.FindFirst(CoreClaimTypes.Application)?.Value ?? "Unknown Application";
         public static string DomainName(this ClaimsPrincipal principal) => 
-            principal.FindFirst(CoreClaimTypes.DomainName)?.Value ?? "Unknown";
+            principal.FindFirst(CoreClaimTypes.DomainName)?.Value ?? "Unknown Domain";
         public static string UserName(this ClaimsPrincipal principal) => 
-            principal.FindFirst(CoreClaimTypes.UserName)?.Value ?? "Unknown";
+            principal.FindFirst(CoreClaimTypes.UserName)?.Value ?? "Unknown UserName";
         public static string ToBlameString(this ClaimsPrincipal principal)
         {
             var domain = principal.FindFirst(CoreClaimTypes.DomainName);
@@ -32,5 +32,9 @@ namespace Core.Business.Extensions
                 return value;
             return null;
         }
+
+        public static SessionInfo AsSessionInfo(this ClaimsPrincipal principal) =>
+            new SessionInfo { };
+            
     }
 }

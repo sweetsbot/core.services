@@ -2,8 +2,8 @@ using System;
 using System.Threading;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
-
-namespace Core.Common
+using Core.Entities;
+namespace Core.Contracts
 {
     public interface IConfigClient
     {

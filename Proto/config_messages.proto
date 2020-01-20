@@ -1,7 +1,7 @@
 syntax = "proto3";
 package core.config;
 
-option csharp_namespace = "Core.Common";
+option csharp_namespace = "Core.Entities";
 
 message Key {
     string value = 1;

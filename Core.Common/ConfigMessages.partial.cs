@@ -1,7 +1,6 @@
-using System;
-using Core.Entities;
+using Core.Extensions;
 
-namespace Core.Common
+namespace Core.Entities
 {
     public partial class Setting
     {

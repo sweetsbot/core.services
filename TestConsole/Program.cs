@@ -4,8 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
-using System.Web;
-using Core.Common;
+using Core.Entities;
 using Grpc.Core;
 using Grpc.Net.Client;
 

@@ -12,38 +12,38 @@ namespace Core.Services {
   {
     static readonly string __ServiceName = "core.proto.Config";
 
-    static readonly grpc::Marshaller<global::Core.Common.Key> __Marshaller_core_config_Key = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Core.Common.Key.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Core.Common.Setting> __Marshaller_core_config_Setting = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Core.Common.Setting.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Core.Common.Keys> __Marshaller_core_config_Keys = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Core.Common.Keys.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Core.Common.ConfigBlob> __Marshaller_core_config_ConfigBlob = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Core.Common.ConfigBlob.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Core.Common.SetSetting> __Marshaller_core_config_SetSetting = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Core.Common.SetSetting.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Core.Entities.Key> __Marshaller_core_config_Key = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Core.Entities.Key.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Core.Entities.Setting> __Marshaller_core_config_Setting = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Core.Entities.Setting.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Core.Entities.Keys> __Marshaller_core_config_Keys = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Core.Entities.Keys.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Core.Entities.ConfigBlob> __Marshaller_core_config_ConfigBlob = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Core.Entities.ConfigBlob.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Core.Entities.SetSetting> __Marshaller_core_config_SetSetting = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Core.Entities.SetSetting.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Google.Protobuf.WellKnownTypes.BoolValue> __Marshaller_google_protobuf_BoolValue = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Google.Protobuf.WellKnownTypes.BoolValue.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Google.Protobuf.WellKnownTypes.Empty> __Marshaller_google_protobuf_Empty = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Google.Protobuf.WellKnownTypes.Empty.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Core.Common.SetGroupSetting> __Marshaller_core_config_SetGroupSetting = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Core.Common.SetGroupSetting.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Core.Common.SetGroupSettingResult> __Marshaller_core_config_SetGroupSettingResult = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Core.Common.SetGroupSettingResult.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Core.Entities.SetGroupSetting> __Marshaller_core_config_SetGroupSetting = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Core.Entities.SetGroupSetting.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Core.Entities.SetGroupSettingResult> __Marshaller_core_config_SetGroupSettingResult = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Core.Entities.SetGroupSettingResult.Parser.ParseFrom);
 
-    static readonly grpc::Method<global::Core.Common.Key, global::Core.Common.Setting> __Method_GetSetting = new grpc::Method<global::Core.Common.Key, global::Core.Common.Setting>(
+    static readonly grpc::Method<global::Core.Entities.Key, global::Core.Entities.Setting> __Method_GetSetting = new grpc::Method<global::Core.Entities.Key, global::Core.Entities.Setting>(
         grpc::MethodType.Unary,
         __ServiceName,
         "GetSetting",
         __Marshaller_core_config_Key,
         __Marshaller_core_config_Setting);
 
-    static readonly grpc::Method<global::Core.Common.Keys, global::Core.Common.ConfigBlob> __Method_GetSettings = new grpc::Method<global::Core.Common.Keys, global::Core.Common.ConfigBlob>(
+    static readonly grpc::Method<global::Core.Entities.Keys, global::Core.Entities.ConfigBlob> __Method_GetSettings = new grpc::Method<global::Core.Entities.Keys, global::Core.Entities.ConfigBlob>(
         grpc::MethodType.Unary,
         __ServiceName,
         "GetSettings",
         __Marshaller_core_config_Keys,
         __Marshaller_core_config_ConfigBlob);
 
-    static readonly grpc::Method<global::Core.Common.SetSetting, global::Google.Protobuf.WellKnownTypes.BoolValue> __Method_AddSetting = new grpc::Method<global::Core.Common.SetSetting, global::Google.Protobuf.WellKnownTypes.BoolValue>(
+    static readonly grpc::Method<global::Core.Entities.SetSetting, global::Google.Protobuf.WellKnownTypes.BoolValue> __Method_AddSetting = new grpc::Method<global::Core.Entities.SetSetting, global::Google.Protobuf.WellKnownTypes.BoolValue>(
         grpc::MethodType.Unary,
         __ServiceName,
         "AddSetting",
         __Marshaller_core_config_SetSetting,
         __Marshaller_google_protobuf_BoolValue);
 
-    static readonly grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::Core.Common.ConfigBlob> __Method_GetUserConfig = new grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::Core.Common.ConfigBlob>(
+    static readonly grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::Core.Entities.ConfigBlob> __Method_GetUserConfig = new grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::Core.Entities.ConfigBlob>(
         grpc::MethodType.Unary,
         __ServiceName,
         "GetUserConfig",
@@ -57,14 +57,14 @@ namespace Core.Services {
         __Marshaller_google_protobuf_Empty,
         __Marshaller_google_protobuf_Empty);
 
-    static readonly grpc::Method<global::Core.Common.Key, global::Core.Common.ConfigBlob> __Method_GetGroupConfig = new grpc::Method<global::Core.Common.Key, global::Core.Common.ConfigBlob>(
+    static readonly grpc::Method<global::Core.Entities.Key, global::Core.Entities.ConfigBlob> __Method_GetGroupConfig = new grpc::Method<global::Core.Entities.Key, global::Core.Entities.ConfigBlob>(
         grpc::MethodType.Unary,
         __ServiceName,
         "GetGroupConfig",
         __Marshaller_core_config_Key,
         __Marshaller_core_config_ConfigBlob);
 
-    static readonly grpc::Method<global::Core.Common.SetGroupSetting, global::Core.Common.SetGroupSettingResult> __Method_AddGroupSetting = new grpc::Method<global::Core.Common.SetGroupSetting, global::Core.Common.SetGroupSettingResult>(
+    static readonly grpc::Method<global::Core.Entities.SetGroupSetting, global::Core.Entities.SetGroupSettingResult> __Method_AddGroupSetting = new grpc::Method<global::Core.Entities.SetGroupSetting, global::Core.Entities.SetGroupSettingResult>(
         grpc::MethodType.Unary,
         __ServiceName,
         "AddGroupSetting",
@@ -81,22 +81,22 @@ namespace Core.Services {
     [grpc::BindServiceMethod(typeof(Config), "BindService")]
     public abstract partial class ConfigBase
     {
-      public virtual global::System.Threading.Tasks.Task<global::Core.Common.Setting> GetSetting(global::Core.Common.Key request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Core.Entities.Setting> GetSetting(global::Core.Entities.Key request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::Core.Common.ConfigBlob> GetSettings(global::Core.Common.Keys request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Core.Entities.ConfigBlob> GetSettings(global::Core.Entities.Keys request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::Google.Protobuf.WellKnownTypes.BoolValue> AddSetting(global::Core.Common.SetSetting request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Google.Protobuf.WellKnownTypes.BoolValue> AddSetting(global::Core.Entities.SetSetting request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::Core.Common.ConfigBlob> GetUserConfig(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Core.Entities.ConfigBlob> GetUserConfig(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -106,12 +106,12 @@ namespace Core.Services {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::Core.Common.ConfigBlob> GetGroupConfig(global::Core.Common.Key request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Core.Entities.ConfigBlob> GetGroupConfig(global::Core.Entities.Key request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::Core.Common.SetGroupSettingResult> AddGroupSetting(global::Core.Common.SetGroupSetting request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Core.Entities.SetGroupSettingResult> AddGroupSetting(global::Core.Entities.SetGroupSetting request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -141,67 +141,67 @@ namespace Core.Services {
       {
       }
 
-      public virtual global::Core.Common.Setting GetSetting(global::Core.Common.Key request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Core.Entities.Setting GetSetting(global::Core.Entities.Key request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return GetSetting(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::Core.Common.Setting GetSetting(global::Core.Common.Key request, grpc::CallOptions options)
+      public virtual global::Core.Entities.Setting GetSetting(global::Core.Entities.Key request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_GetSetting, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::Core.Common.Setting> GetSettingAsync(global::Core.Common.Key request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Core.Entities.Setting> GetSettingAsync(global::Core.Entities.Key request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return GetSettingAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::Core.Common.Setting> GetSettingAsync(global::Core.Common.Key request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Core.Entities.Setting> GetSettingAsync(global::Core.Entities.Key request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetSetting, null, options, request);
       }
-      public virtual global::Core.Common.ConfigBlob GetSettings(global::Core.Common.Keys request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Core.Entities.ConfigBlob GetSettings(global::Core.Entities.Keys request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return GetSettings(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::Core.Common.ConfigBlob GetSettings(global::Core.Common.Keys request, grpc::CallOptions options)
+      public virtual global::Core.Entities.ConfigBlob GetSettings(global::Core.Entities.Keys request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_GetSettings, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::Core.Common.ConfigBlob> GetSettingsAsync(global::Core.Common.Keys request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Core.Entities.ConfigBlob> GetSettingsAsync(global::Core.Entities.Keys request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return GetSettingsAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::Core.Common.ConfigBlob> GetSettingsAsync(global::Core.Common.Keys request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Core.Entities.ConfigBlob> GetSettingsAsync(global::Core.Entities.Keys request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetSettings, null, options, request);
       }
-      public virtual global::Google.Protobuf.WellKnownTypes.BoolValue AddSetting(global::Core.Common.SetSetting request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Google.Protobuf.WellKnownTypes.BoolValue AddSetting(global::Core.Entities.SetSetting request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return AddSetting(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::Google.Protobuf.WellKnownTypes.BoolValue AddSetting(global::Core.Common.SetSetting request, grpc::CallOptions options)
+      public virtual global::Google.Protobuf.WellKnownTypes.BoolValue AddSetting(global::Core.Entities.SetSetting request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_AddSetting, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.BoolValue> AddSettingAsync(global::Core.Common.SetSetting request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.BoolValue> AddSettingAsync(global::Core.Entities.SetSetting request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return AddSettingAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.BoolValue> AddSettingAsync(global::Core.Common.SetSetting request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.BoolValue> AddSettingAsync(global::Core.Entities.SetSetting request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_AddSetting, null, options, request);
       }
-      public virtual global::Core.Common.ConfigBlob GetUserConfig(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Core.Entities.ConfigBlob GetUserConfig(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return GetUserConfig(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::Core.Common.ConfigBlob GetUserConfig(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::CallOptions options)
+      public virtual global::Core.Entities.ConfigBlob GetUserConfig(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_GetUserConfig, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::Core.Common.ConfigBlob> GetUserConfigAsync(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Core.Entities.ConfigBlob> GetUserConfigAsync(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return GetUserConfigAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::Core.Common.ConfigBlob> GetUserConfigAsync(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Core.Entities.ConfigBlob> GetUserConfigAsync(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetUserConfig, null, options, request);
       }
@@ -221,35 +221,35 @@ namespace Core.Services {
       {
         return CallInvoker.AsyncUnaryCall(__Method_ResetCache, null, options, request);
       }
-      public virtual global::Core.Common.ConfigBlob GetGroupConfig(global::Core.Common.Key request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Core.Entities.ConfigBlob GetGroupConfig(global::Core.Entities.Key request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return GetGroupConfig(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::Core.Common.ConfigBlob GetGroupConfig(global::Core.Common.Key request, grpc::CallOptions options)
+      public virtual global::Core.Entities.ConfigBlob GetGroupConfig(global::Core.Entities.Key request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_GetGroupConfig, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::Core.Common.ConfigBlob> GetGroupConfigAsync(global::Core.Common.Key request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Core.Entities.ConfigBlob> GetGroupConfigAsync(global::Core.Entities.Key request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return GetGroupConfigAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::Core.Common.ConfigBlob> GetGroupConfigAsync(global::Core.Common.Key request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Core.Entities.ConfigBlob> GetGroupConfigAsync(global::Core.Entities.Key request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetGroupConfig, null, options, request);
       }
-      public virtual global::Core.Common.SetGroupSettingResult AddGroupSetting(global::Core.Common.SetGroupSetting request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Core.Entities.SetGroupSettingResult AddGroupSetting(global::Core.Entities.SetGroupSetting request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return AddGroupSetting(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::Core.Common.SetGroupSettingResult AddGroupSetting(global::Core.Common.SetGroupSetting request, grpc::CallOptions options)
+      public virtual global::Core.Entities.SetGroupSettingResult AddGroupSetting(global::Core.Entities.SetGroupSetting request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_AddGroupSetting, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::Core.Common.SetGroupSettingResult> AddGroupSettingAsync(global::Core.Common.SetGroupSetting request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Core.Entities.SetGroupSettingResult> AddGroupSettingAsync(global::Core.Entities.SetGroupSetting request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return AddGroupSettingAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::Core.Common.SetGroupSettingResult> AddGroupSettingAsync(global::Core.Common.SetGroupSetting request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Core.Entities.SetGroupSettingResult> AddGroupSettingAsync(global::Core.Entities.SetGroupSetting request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_AddGroupSetting, null, options, request);
       }
@@ -280,13 +280,13 @@ namespace Core.Services {
     /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
     public static void BindService(grpc::ServiceBinderBase serviceBinder, ConfigBase serviceImpl)
     {
-      serviceBinder.AddMethod(__Method_GetSetting, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Core.Common.Key, global::Core.Common.Setting>(serviceImpl.GetSetting));
-      serviceBinder.AddMethod(__Method_GetSettings, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Core.Common.Keys, global::Core.Common.ConfigBlob>(serviceImpl.GetSettings));
-      serviceBinder.AddMethod(__Method_AddSetting, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Core.Common.SetSetting, global::Google.Protobuf.WellKnownTypes.BoolValue>(serviceImpl.AddSetting));
-      serviceBinder.AddMethod(__Method_GetUserConfig, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Google.Protobuf.WellKnownTypes.Empty, global::Core.Common.ConfigBlob>(serviceImpl.GetUserConfig));
+      serviceBinder.AddMethod(__Method_GetSetting, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Core.Entities.Key, global::Core.Entities.Setting>(serviceImpl.GetSetting));
+      serviceBinder.AddMethod(__Method_GetSettings, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Core.Entities.Keys, global::Core.Entities.ConfigBlob>(serviceImpl.GetSettings));
+      serviceBinder.AddMethod(__Method_AddSetting, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Core.Entities.SetSetting, global::Google.Protobuf.WellKnownTypes.BoolValue>(serviceImpl.AddSetting));
+      serviceBinder.AddMethod(__Method_GetUserConfig, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Google.Protobuf.WellKnownTypes.Empty, global::Core.Entities.ConfigBlob>(serviceImpl.GetUserConfig));
       serviceBinder.AddMethod(__Method_ResetCache, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Google.Protobuf.WellKnownTypes.Empty, global::Google.Protobuf.WellKnownTypes.Empty>(serviceImpl.ResetCache));
-      serviceBinder.AddMethod(__Method_GetGroupConfig, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Core.Common.Key, global::Core.Common.ConfigBlob>(serviceImpl.GetGroupConfig));
-      serviceBinder.AddMethod(__Method_AddGroupSetting, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Core.Common.SetGroupSetting, global::Core.Common.SetGroupSettingResult>(serviceImpl.AddGroupSetting));
+      serviceBinder.AddMethod(__Method_GetGroupConfig, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Core.Entities.Key, global::Core.Entities.ConfigBlob>(serviceImpl.GetGroupConfig));
+      serviceBinder.AddMethod(__Method_AddGroupSetting, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Core.Entities.SetGroupSetting, global::Core.Entities.SetGroupSettingResult>(serviceImpl.AddGroupSetting));
     }
 
   }

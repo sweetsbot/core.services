@@ -1,5 +1,5 @@
 using Autofac;
-using Core.Common;
+using Core.Contracts;
 using Core.DataAccess;
 
 namespace Core.Business.Module

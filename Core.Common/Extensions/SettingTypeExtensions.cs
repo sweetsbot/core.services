@@ -1,7 +1,7 @@
 using System;
 using Core.Entities;
 
-namespace Core.Common
+namespace Core.Extensions
 {
     public static class SettingTypeExtensions
     {

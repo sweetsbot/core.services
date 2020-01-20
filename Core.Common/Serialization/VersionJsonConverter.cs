@@ -2,7 +2,7 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Core.Common.Serialization
+namespace Core.Serialization
 {
     public class VersionJsonConverter : JsonConverter<Version>
     {

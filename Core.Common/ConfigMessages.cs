@@ -9,7 +9,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-namespace Core.Common {
+namespace Core.Entities {
 
   /// <summary>Holder for reflection information generated from config_messages.proto</summary>
   public static partial class ConfigMessagesReflection {
@@ -40,18 +40,18 @@ namespace Core.Common {
             "ZRgDIAEoDjIYLmNvcmUuY29uZmlnLlNldHRpbmdUeXBlKm8KC1NldHRpbmdU",
             "eXBlEggKBE5VTEwQABIKCgZTVFJJTkcQARIHCgNJTlQQAhIKCgZET1VCTEUQ",
             "AxILCgdCT09MRUFOEAQSEAoMU1RSSU5HX0FSUkFZEAUSDQoJSU5UX0FSUkFZ",
-            "EAYSBwoDVVJJEAdCDqoCC0NvcmUuQ29tbW9uYgZwcm90bzM="));
+            "EAYSBwoDVVJJEAdCEKoCDUNvcmUuRW50aXRpZXNiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Core.Common.SettingType), }, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Core.Common.Key), global::Core.Common.Key.Parser, new[]{ "Value" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Core.Common.Keys), global::Core.Common.Keys.Parser, new[]{ "Values" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Core.Common.SetSetting), global::Core.Common.SetSetting.Parser, new[]{ "Key", "Value", "Type", "Environment", "Application", "Domain", "UserName", "Encrypt" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Core.Common.SetGroupSetting), global::Core.Common.SetGroupSetting.Parser, new[]{ "GroupName", "Keys" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Core.Common.SetGroupSettingResult), global::Core.Common.SetGroupSettingResult.Parser, new[]{ "GroupName", "Results", "Success" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Core.Common.SetGroupSettingKeyResult), global::Core.Common.SetGroupSettingKeyResult.Parser, new[]{ "Key", "Success" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Core.Common.ConfigBlob), global::Core.Common.ConfigBlob.Parser, new[]{ "Settings" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Core.Common.Setting), global::Core.Common.Setting.Parser, new[]{ "Key", "Value", "Type" }, null, null, null)
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Core.Entities.SettingType), }, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::Core.Entities.Key), global::Core.Entities.Key.Parser, new[]{ "Value" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Core.Entities.Keys), global::Core.Entities.Keys.Parser, new[]{ "Values" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Core.Entities.SetSetting), global::Core.Entities.SetSetting.Parser, new[]{ "Key", "Value", "Type", "Environment", "Application", "Domain", "UserName", "Encrypt" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Core.Entities.SetGroupSetting), global::Core.Entities.SetGroupSetting.Parser, new[]{ "GroupName", "Keys" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Core.Entities.SetGroupSettingResult), global::Core.Entities.SetGroupSettingResult.Parser, new[]{ "GroupName", "Results", "Success" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Core.Entities.SetGroupSettingKeyResult), global::Core.Entities.SetGroupSettingKeyResult.Parser, new[]{ "Key", "Success" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Core.Entities.ConfigBlob), global::Core.Entities.ConfigBlob.Parser, new[]{ "Settings" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Core.Entities.Setting), global::Core.Entities.Setting.Parser, new[]{ "Key", "Value", "Type" }, null, null, null)
           }));
     }
     #endregion
@@ -80,7 +80,7 @@ namespace Core.Common {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Core.Common.ConfigMessagesReflection.Descriptor.MessageTypes[0]; }
+      get { return global::Core.Entities.ConfigMessagesReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -209,7 +209,7 @@ namespace Core.Common {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Core.Common.ConfigMessagesReflection.Descriptor.MessageTypes[1]; }
+      get { return global::Core.Entities.ConfigMessagesReflection.Descriptor.MessageTypes[1]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -330,7 +330,7 @@ namespace Core.Common {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Core.Common.ConfigMessagesReflection.Descriptor.MessageTypes[2]; }
+      get { return global::Core.Entities.ConfigMessagesReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -387,9 +387,9 @@ namespace Core.Common {
 
     /// <summary>Field number for the "type" field.</summary>
     public const int TypeFieldNumber = 3;
-    private global::Core.Common.SettingType type_ = 0;
+    private global::Core.Entities.SettingType type_ = 0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Core.Common.SettingType Type {
+    public global::Core.Entities.SettingType Type {
       get { return type_; }
       set {
         type_ = value;
@@ -618,7 +618,7 @@ namespace Core.Common {
             break;
           }
           case 24: {
-            Type = (global::Core.Common.SettingType) input.ReadEnum();
+            Type = (global::Core.Entities.SettingType) input.ReadEnum();
             break;
           }
           case 34: {
@@ -655,7 +655,7 @@ namespace Core.Common {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Core.Common.ConfigMessagesReflection.Descriptor.MessageTypes[3]; }
+      get { return global::Core.Entities.ConfigMessagesReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -804,7 +804,7 @@ namespace Core.Common {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Core.Common.ConfigMessagesReflection.Descriptor.MessageTypes[4]; }
+      get { return global::Core.Entities.ConfigMessagesReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -845,11 +845,11 @@ namespace Core.Common {
 
     /// <summary>Field number for the "results" field.</summary>
     public const int ResultsFieldNumber = 2;
-    private static readonly pb::FieldCodec<global::Core.Common.SetGroupSettingKeyResult> _repeated_results_codec
-        = pb::FieldCodec.ForMessage(18, global::Core.Common.SetGroupSettingKeyResult.Parser);
-    private readonly pbc::RepeatedField<global::Core.Common.SetGroupSettingKeyResult> results_ = new pbc::RepeatedField<global::Core.Common.SetGroupSettingKeyResult>();
+    private static readonly pb::FieldCodec<global::Core.Entities.SetGroupSettingKeyResult> _repeated_results_codec
+        = pb::FieldCodec.ForMessage(18, global::Core.Entities.SetGroupSettingKeyResult.Parser);
+    private readonly pbc::RepeatedField<global::Core.Entities.SetGroupSettingKeyResult> results_ = new pbc::RepeatedField<global::Core.Entities.SetGroupSettingKeyResult>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::Core.Common.SetGroupSettingKeyResult> Results {
+    public pbc::RepeatedField<global::Core.Entities.SetGroupSettingKeyResult> Results {
       get { return results_; }
     }
 
@@ -981,7 +981,7 @@ namespace Core.Common {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Core.Common.ConfigMessagesReflection.Descriptor.MessageTypes[5]; }
+      get { return global::Core.Entities.ConfigMessagesReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1138,7 +1138,7 @@ namespace Core.Common {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Core.Common.ConfigMessagesReflection.Descriptor.MessageTypes[6]; }
+      get { return global::Core.Entities.ConfigMessagesReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1166,11 +1166,11 @@ namespace Core.Common {
 
     /// <summary>Field number for the "settings" field.</summary>
     public const int SettingsFieldNumber = 1;
-    private static readonly pb::FieldCodec<global::Core.Common.Setting> _repeated_settings_codec
-        = pb::FieldCodec.ForMessage(10, global::Core.Common.Setting.Parser);
-    private readonly pbc::RepeatedField<global::Core.Common.Setting> settings_ = new pbc::RepeatedField<global::Core.Common.Setting>();
+    private static readonly pb::FieldCodec<global::Core.Entities.Setting> _repeated_settings_codec
+        = pb::FieldCodec.ForMessage(10, global::Core.Entities.Setting.Parser);
+    private readonly pbc::RepeatedField<global::Core.Entities.Setting> settings_ = new pbc::RepeatedField<global::Core.Entities.Setting>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::Core.Common.Setting> Settings {
+    public pbc::RepeatedField<global::Core.Entities.Setting> Settings {
       get { return settings_; }
     }
 
@@ -1259,7 +1259,7 @@ namespace Core.Common {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Core.Common.ConfigMessagesReflection.Descriptor.MessageTypes[7]; }
+      get { return global::Core.Entities.ConfigMessagesReflection.Descriptor.MessageTypes[7]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1311,9 +1311,9 @@ namespace Core.Common {
 
     /// <summary>Field number for the "type" field.</summary>
     public const int TypeFieldNumber = 3;
-    private global::Core.Common.SettingType type_ = 0;
+    private global::Core.Entities.SettingType type_ = 0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Core.Common.SettingType Type {
+    public global::Core.Entities.SettingType Type {
       get { return type_; }
       set {
         type_ = value;
@@ -1427,7 +1427,7 @@ namespace Core.Common {
             break;
           }
           case 24: {
-            Type = (global::Core.Common.SettingType) input.ReadEnum();
+            Type = (global::Core.Entities.SettingType) input.ReadEnum();
             break;
           }
         }

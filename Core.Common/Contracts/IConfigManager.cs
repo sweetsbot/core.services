@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Core.Common;
 using Core.Entities;
 
-namespace Core.Business
+namespace Core.Contracts
 {
     public interface IConfigManager
     {

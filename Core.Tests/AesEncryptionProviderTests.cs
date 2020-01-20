@@ -2,6 +2,7 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 using Xunit;
+using Core.Contracts;
 using Core.Encryption;
 
 namespace Core.Tests

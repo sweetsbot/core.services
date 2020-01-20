@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading;
-using Core.Common;
+using Core.Entities;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 
@@ -8,7 +8,7 @@ using Grpc.Core;
 namespace Core.Services
 {
     public static partial class Config {
-        public partial class ConfigClient : IConfigClient
+        public partial class ConfigClient : Contracts.IConfigClient
         {
             public Setting GetSetting(string key, Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default)
             {

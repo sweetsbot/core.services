@@ -1,4 +1,4 @@
-namespace Core.Common
+namespace Core.Contracts
 {
     public interface IEncryptionProvider
     {

@@ -1,8 +1,8 @@
 using System;
 using System.Text.Json.Serialization;
-using Core.Common.Serialization;
+using Core.Serialization;
 
-namespace Core.Common
+namespace Core.Entities
 {
     public class SessionRequest
     {
