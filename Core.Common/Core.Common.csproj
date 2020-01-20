@@ -8,8 +8,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Protobuf Include="..\Proto\config.proto" OutputDir="Services/%(RelativePath)" CompileOutputs="false" GrpcServices="Both" Link="Protos\config.proto" />
-        <Protobuf Include="..\Proto\config_messages.proto" OutputDir="%(RelativePath)" CompileOutputs="false" GrpcServices="None" Link="Protos\config_messages.proto" />
+        <Protobuf Include="..\Proto\config.proto" OutputDir="Services\%(RelativePath)" CompileOutputs="false" GrpcServices="Both" Link="Protos\config.proto" />
+        <Protobuf Include="..\Proto\config_messages.proto" OutputDir="Entities\%(RelativePath)" CompileOutputs="false" GrpcServices="None" Link="Protos\config_messages.proto" />
     </ItemGroup>
     
     <ItemGroup>
@@ -24,10 +24,6 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-    </ItemGroup>
-    
-    <ItemGroup>
-      <Folder Include="Services" />
     </ItemGroup>
 
 </Project>
