@@ -30,7 +30,7 @@ namespace Core.Business
                 user.Application(),
                 user.DomainName(),
                 user.UserName(),
-                key);
+                key.ToLowerInvariant());
 
         public async Task<IEnumerable<ConfigEntrySlim>> GetSettingsAsync(ClaimsPrincipal user, IEnumerable<string> keys) => 
             await GetUserConfigurationAsync(user).ContinueWith(p => p.Result.Where(s => keys.Contains(s.ConfigKeyName, StringComparer.OrdinalIgnoreCase)));
@@ -50,7 +50,7 @@ namespace Core.Business
                 user.Application(),
                 user.DomainName(),
                 user.UserName(),
-                groupName);
+                groupName.ToLowerInvariant());
 
         public Task<IEnumerable<(string Key, bool Success)>> AddGroupConfigurationAsync(ClaimsPrincipal user, SetGroupSetting groupConfig)
         {

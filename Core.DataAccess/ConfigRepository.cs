@@ -44,10 +44,10 @@ namespace Core.DataAccess
                 var values = conn.Query<ConfigEntrySlim>(Constants.Sql.StoredProcGetConfigWeighted,
                     new
                     {
-                        penvironment = environment,
-                        papplication = application,
-                        pdomainname = domainName,
-                        pusername = userName
+                        penvironment = environment.ToLowerInvariant(),
+                        papplication = application.ToLowerInvariant(),
+                        pdomainname = domainName.ToLowerInvariant(),
+                        pusername = userName.ToLowerInvariant(),
                     },
                     commandTimeout: 120,
                     commandType: CommandType.StoredProcedure);
@@ -65,11 +65,10 @@ namespace Core.DataAccess
                 var values = await conn.QueryAsync<ConfigEntrySlim>(Constants.Sql.StoredProcGetConfigWeighted,
                     new
                     {
-                        penvironment = environment,
-                        papplication =
-                        application,
-                        pdomainname = domainName,
-                        pusername = userName
+                        penvironment = environment.ToLowerInvariant(),
+                        papplication = application.ToLowerInvariant(),
+                        pdomainname = domainName.ToLowerInvariant(),
+                        pusername = userName.ToLowerInvariant(),
                     },
                     commandTimeout: 120,
                     commandType: CommandType.StoredProcedure);
@@ -88,11 +87,11 @@ namespace Core.DataAccess
                 var entry = conn.QuerySingleOrDefault<ConfigEntrySlim>(Constants.Sql.StoredProcGetConfigWeighted,
                     new
                     {
-                        penvironment = environment,
-                        papplication = application,
-                        pdomainname = domainName,
-                        pusername = userName,
-                        pconfigkeyname = configKeyName
+                        penvironment = environment.ToLowerInvariant(),
+                        papplication = application.ToLowerInvariant(),
+                        pdomainname = domainName.ToLowerInvariant(),
+                        pusername = userName.ToLowerInvariant(),
+                        pconfigkeyname = configKeyName.ToLowerInvariant(),
                     },
                     commandTimeout: 120,
                     commandType: CommandType.StoredProcedure);
@@ -111,11 +110,11 @@ namespace Core.DataAccess
                 var entry = await conn.QuerySingleOrDefaultAsync<ConfigEntrySlim>(Constants.Sql.StoredProcGetConfigWeighted,
                     new
                     {
-                        penvironment = environment,
-                        papplication = application,
-                        pdomainname = domainName,
-                        pusername = userName,
-                        pconfigkeyname = configKeyName
+                        penvironment = environment.ToLowerInvariant(),
+                        papplication = application.ToLowerInvariant(),
+                        pdomainname = domainName.ToLowerInvariant(),
+                        pusername = userName.ToLowerInvariant(),
+                        pconfigkeyname = configKeyName.ToLowerInvariant(),
                     },
                     commandTimeout: 120,
                     commandType: CommandType.StoredProcedure);
@@ -132,11 +131,11 @@ namespace Core.DataAccess
                 var values = conn.Query<ConfigEntrySlim>(Constants.Sql.StoredProcGetConfigWeightedByGroup,
                     new
                     {
-                        penvironment = environment,
-                        papplication = application,
-                        pdomainname = domainName,
-                        pusername = userName,
-                        pconfiggroupname = groupName,
+                        penvironment = environment.ToLowerInvariant(),
+                        papplication = application.ToLowerInvariant(),
+                        pdomainname = domainName.ToLowerInvariant(),
+                        pusername = userName.ToLowerInvariant(),
+                        pconfiggroupname = groupName.ToLowerInvariant(),
                     },
                     commandTimeout: 120,
                     commandType: CommandType.StoredProcedure);
@@ -153,11 +152,11 @@ namespace Core.DataAccess
                 var values = await conn.QueryAsync<ConfigEntrySlim>(Constants.Sql.StoredProcGetConfigWeightedByGroup,
                     new
                     {
-                        penvironment = environment,
-                        papplication = application,
-                        pdomainname = null as string,
-                        pusername = null as string,
-                        pconfiggroupname = groupName,
+                        penvironment = environment.ToLowerInvariant(),
+                        papplication = application.ToLowerInvariant(),
+                        pdomainname = domainName.ToLowerInvariant(),
+                        pusername = userName.ToLowerInvariant(),
+                        pconfiggroupname = groupName.ToLowerInvariant(),
                     },
                     commandTimeout: 120,
                     commandType: CommandType.StoredProcedure);
@@ -173,10 +172,10 @@ namespace Core.DataAccess
                 var entry = conn.Query<ConfigEntry>(Constants.Sql.StoredProcGetConfigWeightedFull,
                     new
                     {
-                        penvironment = environment,
-                        papplication = application,
-                        pdomainname = domainName,
-                        pusername = userName,
+                        penvironment = environment.ToLowerInvariant(),
+                        papplication = application.ToLowerInvariant(),
+                        pdomainname = domainName.ToLowerInvariant(),
+                        pusername = userName.ToLowerInvariant(),
                     },
                     commandTimeout: 120,
                     commandType: CommandType.StoredProcedure);
@@ -192,10 +191,10 @@ namespace Core.DataAccess
                 var entry = await conn.QueryAsync<ConfigEntry>(Constants.Sql.StoredProcGetConfigWeightedFull,
                     new
                     {
-                        penvironment = environment,
-                        papplication = application,
-                        pdomainname = domainName,
-                        pusername = userName,
+                        penvironment = environment.ToLowerInvariant(),
+                        papplication = application.ToLowerInvariant(),
+                        pdomainname = domainName.ToLowerInvariant(),
+                        pusername = userName.ToLowerInvariant(),
                     },
                     commandTimeout: 120,
                     commandType: CommandType.StoredProcedure);
@@ -214,11 +213,11 @@ namespace Core.DataAccess
                 var entry = conn.QuerySingleOrDefault<ConfigEntry>(Constants.Sql.StoredProcGetConfigWeightedFull,
                     new
                     {
-                        penvironment = environment,
-                        papplication = application,
-                        pdomainname = domainName,
-                        pusername = userName,
-                        pconfigkeyname = configKeyName
+                        penvironment = environment.ToLowerInvariant(),
+                        papplication = application.ToLowerInvariant(),
+                        pdomainname = domainName.ToLowerInvariant(),
+                        pusername = userName.ToLowerInvariant(),
+                        pconfigkeyname = configKeyName.ToLowerInvariant()
                     },
                     commandTimeout: 120,
                     commandType: CommandType.StoredProcedure);
@@ -237,11 +236,11 @@ namespace Core.DataAccess
                 var entry = await conn.QuerySingleOrDefaultAsync<ConfigEntry>(Constants.Sql.StoredProcGetConfigWeightedFull,
                     new
                     {
-                        penvironment = environment,
-                        papplication = application,
-                        pdomainname = domainName,
-                        pusername = userName,
-                        pconfigkeyname = configKeyName
+                        penvironment = environment.ToLowerInvariant(),
+                        papplication = application.ToLowerInvariant(),
+                        pdomainname = domainName.ToLowerInvariant(),
+                        pusername = userName.ToLowerInvariant(),
+                        pconfigkeyname = configKeyName.ToLowerInvariant()
                     },
                     commandTimeout: 120,
                     commandType: CommandType.StoredProcedure);
@@ -257,7 +256,7 @@ namespace Core.DataAccess
                 return conn.ExecuteScalar<bool>(Constants.Sql.QueryConfigKeyExists,
                     new
                     {
-                        configKeyName
+                        configKeyName=configKeyName.ToLowerInvariant()
                     });
             }
         }
@@ -290,7 +289,7 @@ namespace Core.DataAccess
                 return conn.QuerySingleOrDefault<ConfigKey>(Constants.Sql.QueryGetConfigKeyByName,
                     new
                     {
-                        configKeyName
+                        configKeyName=configKeyName.ToLowerInvariant()
                     });
             }
         }
@@ -314,15 +313,15 @@ namespace Core.DataAccess
                 var configEntryId = conn.ExecuteScalar<int>(Constants.Sql.StoredProcInsertConfigEntry,
                     new
                     {
-                        pcreatedby = entry.CreatedBy,
-                        penvironment = entry.Environment,
-                        pconfigkeyname = entry.ConfigKeyName,
+                        pcreatedby = entry.CreatedBy.ToLowerInvariant(),
+                        penvironment = entry.Environment.ToLowerInvariant(),
+                        pconfigkeyname = entry.ConfigKeyName.ToLowerInvariant(),
                         pconfigvalue = entry.ConfigValue,
                         pconfigvaluetype = entry.ConfigValueType,
                         pisencrypted = entry.IsEncrypted,
-                        papplication = entry.Application,
-                        pdomainname = entry.DomainName,
-                        pusername = entry.UserName
+                        papplication = entry.Application.ToLowerInvariant(),
+                        pdomainname = entry.DomainName.ToLowerInvariant(),
+                        pusername = entry.UserName.ToLowerInvariant(),
                     },
                     commandType: CommandType.StoredProcedure);
                 return conn.QuerySingle<ConfigEntry>(Constants.Sql.QueryGetConfigEntryById,
@@ -340,18 +339,18 @@ namespace Core.DataAccess
                 conn.Execute(Constants.Sql.QueryUpdateConfigEntry,
                     new
                     {
-                        environment = entry.Environment,
-                        application = entry.Application,
-                        domainName = entry.DomainName,
-                        userName = entry.UserName,
+                        environment = entry.Environment.ToLowerInvariant(),
+                        application = entry.Application.ToLowerInvariant(),
+                        domainName = entry.DomainName.ToLowerInvariant(),
+                        userName = entry.UserName.ToLowerInvariant(),
                         configKeyId = entry.ConfigKeyId,
                         configValue = entry.ConfigValue,
                         configValueTypeId = entry.ConfigValueType,
                         isEncrypted = entry.IsEncrypted,
                         active = entry.Active,
-                        createdBy = entry.CreatedBy,
+                        createdBy = entry.CreatedBy.ToLowerInvariant(),
                         createdAt = entry.CreatedAt,
-                        updatedBy = entry.UpdatedBy,
+                        updatedBy = entry.UpdatedBy.ToLowerInvariant(),
                         updatedAt = entry.UpdatedAt,
                         configEntryId = entry.ConfigEntryId
                     });
