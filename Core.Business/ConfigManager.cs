@@ -12,22 +12,21 @@ namespace Core.Business
 {
     public class ConfigManager : IConfigManager
     {
-        private readonly IHostEnvironment _env;
-        private readonly IConfigRepository _configRepository;
+        private readonly string environment;
+        private readonly IConfigRepository repository;
 
         public ConfigManager(
             IHostEnvironment env,
             IConfigRepository configRepository)
         {
-            this._env = env ?? throw new ArgumentNullException(nameof(env));
-            this._configRepository = configRepository ?? throw new ArgumentNullException(nameof(configRepository));
+            this.environment = env?.EnvironmentName.ToLowerInvariant() ?? throw new ArgumentNullException(nameof(env));
+            this.repository = configRepository ?? throw new ArgumentNullException(nameof(configRepository));
         }
 
-        private string Environment => _env.EnvironmentName.ToLowerInvariant();
         
         public async Task<ConfigEntrySlim> GetSettingAsync(ClaimsPrincipal user, string key) =>
-            await _configRepository.GetWeightedConfigEntryByKeyAsync(
-                Environment,
+            await repository.GetWeightedConfigEntryByKeyAsync(
+                environment,
                 user.Application(),
                 user.DomainName(),
                 user.UserName(),
@@ -39,15 +38,15 @@ namespace Core.Business
         Task IConfigManager.ResetCacheAsync(ClaimsPrincipal user) => Task.CompletedTask;
 
         public async Task<IEnumerable<ConfigEntrySlim>> GetUserConfigurationAsync(ClaimsPrincipal user) =>
-            await _configRepository.GetWeightedConfigEntriesAsync(
-                Environment,
+            await repository.GetWeightedConfigEntriesAsync(
+                environment,
                 user.Application(),
                 user.DomainName(),
                 user.UserName());
 
         public async Task<IEnumerable<ConfigEntrySlim>> GetGroupConfigurationAsync(ClaimsPrincipal user, string groupName) =>
-            await _configRepository.GetWeightedConfigEntryByGroupAsync(
-                Environment,
+            await repository.GetWeightedConfigEntryByGroupAsync(
+                environment,
                 user.Application(),
                 user.DomainName(),
                 user.UserName(),
@@ -68,7 +67,7 @@ namespace Core.Business
                 ConfigValueType = request.Type.ToConfigValueType(),
                 Application = string.IsNullOrEmpty(request.Application) ? null : request.Application,
                 DomainName = string.IsNullOrEmpty(request.Domain) ? null : request.Domain,
-                Environment = string.IsNullOrEmpty(request.Environment) ? _env.EnvironmentName : request.Environment,
+                Environment = string.IsNullOrEmpty(request.Environment) ? environment : request.Environment,
                 UserName = string.IsNullOrEmpty(request.UserName) ? null : request.UserName,
                 Active = true,
                 CreatedBy = user.ToBlameString(),
@@ -76,7 +75,7 @@ namespace Core.Business
             };
             try
             {
-                entry = await _configRepository.InsertOrUpdateConfigEntryAsync(entry);
+                entry = await repository.InsertOrUpdateConfigEntryAsync(entry);
                 return entry != null;
             }
             catch (InvalidOperationException)

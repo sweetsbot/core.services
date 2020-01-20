@@ -15,6 +15,9 @@ namespace Core.Business.Module
             builder.Register(ctx => new AesEncryptionProvider(SecretKey))
                 .As<IEncryptionProvider>()
                 .InstancePerDependency();
+            builder.RegisterType<Cache.RedisConfigCache>()
+                .As<Contracts.IConfigCache>()
+                .InstancePerDependency();
             builder.RegisterType<ConfigManager>()
                 .Named<IConfigManager>("DatabaseConfig")
                 .InstancePerDependency();
