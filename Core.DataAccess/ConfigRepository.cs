@@ -392,7 +392,7 @@ namespace Core.DataAccess
                 return await conn.ExecuteScalarAsync<bool>(Constants.Sql.QueryConfigKeyExists,
                     new
                     {
-                        configKeyName
+                        configKeyName = configKeyName.ToLowerInvariant()
                     });
             }
         }
@@ -425,7 +425,7 @@ namespace Core.DataAccess
                 return await conn.QuerySingleOrDefaultAsync<ConfigKey>(Constants.Sql.QueryGetConfigKeyByName,
                     new
                     {
-                        configKeyName
+                        configKeyName = configKeyName.ToLowerInvariant()
                     });
             }
         }
@@ -449,15 +449,15 @@ namespace Core.DataAccess
                 var configEntryId = await conn.ExecuteScalarAsync<int>(Constants.Sql.StoredProcInsertConfigEntry,
                     new
                     {
-                        pcreatedby = entry.CreatedBy,
-                        penvironment = entry.Environment,
-                        pconfigkeyname = entry.ConfigKeyName,
+                        pcreatedby = entry.CreatedBy.ToLowerInvariant(),
+                        penvironment = entry.Environment.ToLowerInvariant(),
+                        pconfigkeyname = entry.ConfigKeyName.ToLowerInvariant(),
                         pconfigvalue = entry.ConfigValue,
                         pconfigvaluetype = entry.ConfigValueType,
                         pisencrypted = entry.IsEncrypted,
-                        papplication = entry.Application,
-                        pdomainname = entry.DomainName,
-                        pusername = entry.UserName
+                        papplication = entry.Application.ToLowerInvariant(),
+                        pdomainname = entry.DomainName.ToLowerInvariant(),
+                        pusername = entry.UserName.ToLowerInvariant(),
                     },
                     commandType: CommandType.StoredProcedure);
                 return await conn.QuerySingleAsync<ConfigEntry>(Constants.Sql.QueryGetConfigEntryById,
@@ -475,18 +475,18 @@ namespace Core.DataAccess
                 await conn.ExecuteAsync(Constants.Sql.QueryUpdateConfigEntry,
                     new
                     {
-                        environment = entry.Environment,
-                        application = entry.Application,
-                        domainName = entry.DomainName,
-                        userName = entry.UserName,
+                        environment = entry.Environment.ToLowerInvariant(),
+                        application = entry.Application.ToLowerInvariant(),
+                        domainName = entry.DomainName.ToLowerInvariant(),
+                        userName = entry.UserName.ToLowerInvariant(),
                         configKeyId = entry.ConfigKeyId,
                         configValue = entry.ConfigValue,
                         configValueTypeId = entry.ConfigValueType,
                         isEncrypted = entry.IsEncrypted,
                         active = entry.Active,
-                        createdBy = entry.CreatedBy,
+                        createdBy = entry.CreatedBy.ToLowerInvariant(),
                         createdAt = entry.CreatedAt,
-                        updatedBy = entry.UpdatedBy,
+                        updatedBy = entry.UpdatedBy.ToLowerInvariant(),
                         updatedAt = entry.UpdatedAt,
                         configEntryId = entry.ConfigEntryId
                     });
