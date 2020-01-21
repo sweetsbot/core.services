@@ -32,13 +32,15 @@ namespace Core.Tests
         [Fact]
         public void Ctor_EmptyKeyThrowsException()
         {
+            Assert.Throws<ArgumentException>(() => new AesEncryptionProvider(new byte[0]));
             Assert.Throws<ArgumentException>(() => new AesEncryptionProvider(string.Empty));
         }
 
         [Fact]
         public void Ctor_NullKeyThrowsException()
         {
-            Assert.Throws<ArgumentException>(() => new AesEncryptionProvider(null));
+            Assert.Throws<ArgumentNullException>(() => new AesEncryptionProvider(null));
+            Assert.Throws<ArgumentNullException>(() => new AesEncryptionProvider(null, 24));
         }
         #endregion
         

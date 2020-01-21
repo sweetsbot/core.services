@@ -13,7 +13,9 @@ namespace Core.Encryption
 
         public AesEncryptionProvider(string key, int keyLength = 24)
         {
-            if (string.IsNullOrEmpty(key))
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
+            if (string.Empty == key)
                 throw new ArgumentException("Key must have have a valid value.", nameof(key));
             if (!validLengths.Contains(keyLength))
                 throw new ArgumentException("Invalid key length, key must be of sizes 16, 24 or 32", nameof(key));
