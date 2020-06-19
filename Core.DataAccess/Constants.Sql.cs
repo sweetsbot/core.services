@@ -4,7 +4,7 @@ namespace Core.DataAccess
     {
         public static class Sql
         {
-            public const string StoredProcGetConfigWeighted = "config.spgetconfigweighted";
+            public const string StoredProcGetConfigWeighted = "spgetconfigweighted";
             public const string StoredProcGetConfigWeightedByGroup = "config.spgetconfigweightedgroup";
             public const string StoredProcGetConfigWeightedFull = "config.spgetconfigweightedfull";
             public const string StoredProcInsertConfigEntry = "config.spinsertentry";
