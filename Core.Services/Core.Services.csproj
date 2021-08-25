@@ -9,7 +9,7 @@
     <ItemGroup>
         <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="5.0.1" />
         <PackageReference Include="Grpc.AspNetCore" Version="2.24.0" />
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.18" />
         <PackageReference Include="StackExchange.Redis" Version="2.0.601" />
         <PackageReference Include="StackExchange.Redis.Extensions.Newtonsoft" Version="5.3.0" />
     </ItemGroup>
