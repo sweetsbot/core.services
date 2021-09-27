@@ -2,13 +2,13 @@
 
     <PropertyGroup>
         <LangVersion>8</LangVersion>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <TargetFramework>net5.0</TargetFramework>
         <OutputType>Exe</OutputType>
         <Platforms>AnyCPU;x64</Platforms>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Grpc.Net.Client" Version="2.24.0" />
+      <PackageReference Include="Grpc.Net.Client" Version="2.39.0" />
     </ItemGroup>
 
     <ItemGroup>

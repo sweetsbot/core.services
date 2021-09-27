@@ -43,15 +43,15 @@ namespace Core.Entities {
             "EAYSBwoDVVJJEAdCEKoCDUNvcmUuRW50aXRpZXNiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Core.Entities.SettingType), }, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Core.Entities.Key), global::Core.Entities.Key.Parser, new[]{ "Value" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Core.Entities.Keys), global::Core.Entities.Keys.Parser, new[]{ "Values" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Core.Entities.SetSetting), global::Core.Entities.SetSetting.Parser, new[]{ "Key", "Value", "Type", "Environment", "Application", "Domain", "UserName", "Encrypt" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Core.Entities.SetGroupSetting), global::Core.Entities.SetGroupSetting.Parser, new[]{ "GroupName", "Keys" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Core.Entities.SetGroupSettingResult), global::Core.Entities.SetGroupSettingResult.Parser, new[]{ "GroupName", "Results", "Success" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Core.Entities.SetGroupSettingKeyResult), global::Core.Entities.SetGroupSettingKeyResult.Parser, new[]{ "Key", "Success" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Core.Entities.ConfigBlob), global::Core.Entities.ConfigBlob.Parser, new[]{ "Settings" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Core.Entities.Setting), global::Core.Entities.Setting.Parser, new[]{ "Key", "Value", "Type" }, null, null, null)
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Core.Entities.SettingType), }, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::Core.Entities.Key), global::Core.Entities.Key.Parser, new[]{ "Value" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Core.Entities.Keys), global::Core.Entities.Keys.Parser, new[]{ "Values" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Core.Entities.SetSetting), global::Core.Entities.SetSetting.Parser, new[]{ "Key", "Value", "Type", "Environment", "Application", "Domain", "UserName", "Encrypt" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Core.Entities.SetGroupSetting), global::Core.Entities.SetGroupSetting.Parser, new[]{ "GroupName", "Keys" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Core.Entities.SetGroupSettingResult), global::Core.Entities.SetGroupSettingResult.Parser, new[]{ "GroupName", "Results", "Success" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Core.Entities.SetGroupSettingKeyResult), global::Core.Entities.SetGroupSettingKeyResult.Parser, new[]{ "Key", "Success" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Core.Entities.ConfigBlob), global::Core.Entities.ConfigBlob.Parser, new[]{ "Settings" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Core.Entities.Setting), global::Core.Entities.Setting.Parser, new[]{ "Key", "Value", "Type" }, null, null, null, null)
           }));
     }
     #endregion
@@ -72,7 +72,11 @@ namespace Core.Entities {
   #endregion
 
   #region Messages
-  public sealed partial class Key : pb::IMessage<Key> {
+  public sealed partial class Key : pb::IMessage<Key>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
     private static readonly pb::MessageParser<Key> _parser = new pb::MessageParser<Key>(() => new Key());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -151,6 +155,9 @@ namespace Core.Entities {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
       if (Value.Length != 0) {
         output.WriteRawTag(10);
         output.WriteString(Value);
@@ -158,7 +165,21 @@ namespace Core.Entities {
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
+    #endif
     }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Value.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Value);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
@@ -185,6 +206,9 @@ namespace Core.Entities {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
         switch(tag) {
@@ -197,11 +221,34 @@ namespace Core.Entities {
           }
         }
       }
+    #endif
     }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            Value = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
 
   }
 
-  public sealed partial class Keys : pb::IMessage<Keys> {
+  public sealed partial class Keys : pb::IMessage<Keys>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
     private static readonly pb::MessageParser<Keys> _parser = new pb::MessageParser<Keys>(() => new Keys());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -279,11 +326,25 @@ namespace Core.Entities {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
       values_.WriteTo(output, _repeated_values_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
+    #endif
     }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      values_.WriteTo(ref output, _repeated_values_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
@@ -306,6 +367,9 @@ namespace Core.Entities {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
         switch(tag) {
@@ -318,11 +382,34 @@ namespace Core.Entities {
           }
         }
       }
+    #endif
     }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            values_.AddEntriesFrom(ref input, _repeated_values_codec);
+            break;
+          }
+        }
+      }
+    }
+    #endif
 
   }
 
-  public sealed partial class SetSetting : pb::IMessage<SetSetting> {
+  public sealed partial class SetSetting : pb::IMessage<SetSetting>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
     private static readonly pb::MessageParser<SetSetting> _parser = new pb::MessageParser<SetSetting>(() => new SetSetting());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -387,7 +474,7 @@ namespace Core.Entities {
 
     /// <summary>Field number for the "type" field.</summary>
     public const int TypeFieldNumber = 3;
-    private global::Core.Entities.SettingType type_ = 0;
+    private global::Core.Entities.SettingType type_ = global::Core.Entities.SettingType.Null;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public global::Core.Entities.SettingType Type {
       get { return type_; }
@@ -480,7 +567,7 @@ namespace Core.Entities {
       int hash = 1;
       if (Key.Length != 0) hash ^= Key.GetHashCode();
       if (Value.Length != 0) hash ^= Value.GetHashCode();
-      if (Type != 0) hash ^= Type.GetHashCode();
+      if (Type != global::Core.Entities.SettingType.Null) hash ^= Type.GetHashCode();
       if (Environment.Length != 0) hash ^= Environment.GetHashCode();
       if (Application.Length != 0) hash ^= Application.GetHashCode();
       if (Domain.Length != 0) hash ^= Domain.GetHashCode();
@@ -499,6 +586,9 @@ namespace Core.Entities {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
       if (Key.Length != 0) {
         output.WriteRawTag(10);
         output.WriteString(Key);
@@ -507,7 +597,7 @@ namespace Core.Entities {
         output.WriteRawTag(18);
         output.WriteString(Value);
       }
-      if (Type != 0) {
+      if (Type != global::Core.Entities.SettingType.Null) {
         output.WriteRawTag(24);
         output.WriteEnum((int) Type);
       }
@@ -534,7 +624,49 @@ namespace Core.Entities {
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
+    #endif
     }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Key.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Key);
+      }
+      if (Value.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Value);
+      }
+      if (Type != global::Core.Entities.SettingType.Null) {
+        output.WriteRawTag(24);
+        output.WriteEnum((int) Type);
+      }
+      if (Environment.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(Environment);
+      }
+      if (Application.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(Application);
+      }
+      if (Domain.Length != 0) {
+        output.WriteRawTag(50);
+        output.WriteString(Domain);
+      }
+      if (UserName.Length != 0) {
+        output.WriteRawTag(58);
+        output.WriteString(UserName);
+      }
+      if (Encrypt != false) {
+        output.WriteRawTag(64);
+        output.WriteBool(Encrypt);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
@@ -545,7 +677,7 @@ namespace Core.Entities {
       if (Value.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Value);
       }
-      if (Type != 0) {
+      if (Type != global::Core.Entities.SettingType.Null) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Type);
       }
       if (Environment.Length != 0) {
@@ -580,7 +712,7 @@ namespace Core.Entities {
       if (other.Value.Length != 0) {
         Value = other.Value;
       }
-      if (other.Type != 0) {
+      if (other.Type != global::Core.Entities.SettingType.Null) {
         Type = other.Type;
       }
       if (other.Environment.Length != 0) {
@@ -603,6 +735,9 @@ namespace Core.Entities {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
         switch(tag) {
@@ -643,11 +778,62 @@ namespace Core.Entities {
           }
         }
       }
+    #endif
     }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            Key = input.ReadString();
+            break;
+          }
+          case 18: {
+            Value = input.ReadString();
+            break;
+          }
+          case 24: {
+            Type = (global::Core.Entities.SettingType) input.ReadEnum();
+            break;
+          }
+          case 34: {
+            Environment = input.ReadString();
+            break;
+          }
+          case 42: {
+            Application = input.ReadString();
+            break;
+          }
+          case 50: {
+            Domain = input.ReadString();
+            break;
+          }
+          case 58: {
+            UserName = input.ReadString();
+            break;
+          }
+          case 64: {
+            Encrypt = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+    #endif
 
   }
 
-  public sealed partial class SetGroupSetting : pb::IMessage<SetGroupSetting> {
+  public sealed partial class SetGroupSetting : pb::IMessage<SetGroupSetting>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
     private static readonly pb::MessageParser<SetGroupSetting> _parser = new pb::MessageParser<SetGroupSetting>(() => new SetGroupSetting());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -739,6 +925,9 @@ namespace Core.Entities {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
       if (GroupName.Length != 0) {
         output.WriteRawTag(10);
         output.WriteString(GroupName);
@@ -747,7 +936,22 @@ namespace Core.Entities {
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
+    #endif
     }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (GroupName.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(GroupName);
+      }
+      keys_.WriteTo(ref output, _repeated_keys_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
@@ -776,6 +980,9 @@ namespace Core.Entities {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
         switch(tag) {
@@ -792,11 +999,38 @@ namespace Core.Entities {
           }
         }
       }
+    #endif
     }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            GroupName = input.ReadString();
+            break;
+          }
+          case 18: {
+            keys_.AddEntriesFrom(ref input, _repeated_keys_codec);
+            break;
+          }
+        }
+      }
+    }
+    #endif
 
   }
 
-  public sealed partial class SetGroupSettingResult : pb::IMessage<SetGroupSettingResult> {
+  public sealed partial class SetGroupSettingResult : pb::IMessage<SetGroupSettingResult>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
     private static readonly pb::MessageParser<SetGroupSettingResult> _parser = new pb::MessageParser<SetGroupSettingResult>(() => new SetGroupSettingResult());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -902,6 +1136,9 @@ namespace Core.Entities {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
       if (GroupName.Length != 0) {
         output.WriteRawTag(10);
         output.WriteString(GroupName);
@@ -914,7 +1151,26 @@ namespace Core.Entities {
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
+    #endif
     }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (GroupName.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(GroupName);
+      }
+      results_.WriteTo(ref output, _repeated_results_codec);
+      if (Success != false) {
+        output.WriteRawTag(24);
+        output.WriteBool(Success);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
@@ -949,6 +1205,9 @@ namespace Core.Entities {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
         switch(tag) {
@@ -969,11 +1228,42 @@ namespace Core.Entities {
           }
         }
       }
+    #endif
     }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            GroupName = input.ReadString();
+            break;
+          }
+          case 18: {
+            results_.AddEntriesFrom(ref input, _repeated_results_codec);
+            break;
+          }
+          case 24: {
+            Success = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+    #endif
 
   }
 
-  public sealed partial class SetGroupSettingKeyResult : pb::IMessage<SetGroupSettingKeyResult> {
+  public sealed partial class SetGroupSettingKeyResult : pb::IMessage<SetGroupSettingKeyResult>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
     private static readonly pb::MessageParser<SetGroupSettingKeyResult> _parser = new pb::MessageParser<SetGroupSettingKeyResult>(() => new SetGroupSettingKeyResult());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1066,6 +1356,9 @@ namespace Core.Entities {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
       if (Key.Length != 0) {
         output.WriteRawTag(10);
         output.WriteString(Key);
@@ -1077,7 +1370,25 @@ namespace Core.Entities {
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
+    #endif
     }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Key.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Key);
+      }
+      if (Success != false) {
+        output.WriteRawTag(16);
+        output.WriteBool(Success);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
@@ -1110,6 +1421,9 @@ namespace Core.Entities {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
         switch(tag) {
@@ -1126,11 +1440,38 @@ namespace Core.Entities {
           }
         }
       }
+    #endif
     }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            Key = input.ReadString();
+            break;
+          }
+          case 16: {
+            Success = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+    #endif
 
   }
 
-  public sealed partial class ConfigBlob : pb::IMessage<ConfigBlob> {
+  public sealed partial class ConfigBlob : pb::IMessage<ConfigBlob>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
     private static readonly pb::MessageParser<ConfigBlob> _parser = new pb::MessageParser<ConfigBlob>(() => new ConfigBlob());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1208,11 +1549,25 @@ namespace Core.Entities {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
       settings_.WriteTo(output, _repeated_settings_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
+    #endif
     }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      settings_.WriteTo(ref output, _repeated_settings_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
@@ -1235,6 +1590,9 @@ namespace Core.Entities {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
         switch(tag) {
@@ -1247,11 +1605,34 @@ namespace Core.Entities {
           }
         }
       }
+    #endif
     }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            settings_.AddEntriesFrom(ref input, _repeated_settings_codec);
+            break;
+          }
+        }
+      }
+    }
+    #endif
 
   }
 
-  public sealed partial class Setting : pb::IMessage<Setting> {
+  public sealed partial class Setting : pb::IMessage<Setting>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
     private static readonly pb::MessageParser<Setting> _parser = new pb::MessageParser<Setting>(() => new Setting());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1311,7 +1692,7 @@ namespace Core.Entities {
 
     /// <summary>Field number for the "type" field.</summary>
     public const int TypeFieldNumber = 3;
-    private global::Core.Entities.SettingType type_ = 0;
+    private global::Core.Entities.SettingType type_ = global::Core.Entities.SettingType.Null;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public global::Core.Entities.SettingType Type {
       get { return type_; }
@@ -1344,7 +1725,7 @@ namespace Core.Entities {
       int hash = 1;
       if (Key.Length != 0) hash ^= Key.GetHashCode();
       if (Value.Length != 0) hash ^= Value.GetHashCode();
-      if (Type != 0) hash ^= Type.GetHashCode();
+      if (Type != global::Core.Entities.SettingType.Null) hash ^= Type.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1358,6 +1739,9 @@ namespace Core.Entities {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
       if (Key.Length != 0) {
         output.WriteRawTag(10);
         output.WriteString(Key);
@@ -1366,14 +1750,36 @@ namespace Core.Entities {
         output.WriteRawTag(18);
         output.WriteString(Value);
       }
-      if (Type != 0) {
+      if (Type != global::Core.Entities.SettingType.Null) {
         output.WriteRawTag(24);
         output.WriteEnum((int) Type);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
+    #endif
     }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Key.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Key);
+      }
+      if (Value.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Value);
+      }
+      if (Type != global::Core.Entities.SettingType.Null) {
+        output.WriteRawTag(24);
+        output.WriteEnum((int) Type);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
@@ -1384,7 +1790,7 @@ namespace Core.Entities {
       if (Value.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Value);
       }
-      if (Type != 0) {
+      if (Type != global::Core.Entities.SettingType.Null) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Type);
       }
       if (_unknownFields != null) {
@@ -1404,7 +1810,7 @@ namespace Core.Entities {
       if (other.Value.Length != 0) {
         Value = other.Value;
       }
-      if (other.Type != 0) {
+      if (other.Type != global::Core.Entities.SettingType.Null) {
         Type = other.Type;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -1412,6 +1818,9 @@ namespace Core.Entities {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
         switch(tag) {
@@ -1432,7 +1841,34 @@ namespace Core.Entities {
           }
         }
       }
+    #endif
     }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            Key = input.ReadString();
+            break;
+          }
+          case 18: {
+            Value = input.ReadString();
+            break;
+          }
+          case 24: {
+            Type = (global::Core.Entities.SettingType) input.ReadEnum();
+            break;
+          }
+        }
+      }
+    }
+    #endif
 
   }
 
