@@ -46,79 +46,77 @@ namespace Core.Services {
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::Core.Entities.Key> __Marshaller_core_config_Key = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Core.Entities.Key.Parser));
+    static readonly grpc::Marshaller<global::Core.Entities.GetSettingReq> __Marshaller_core_config_GetSettingReq = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Core.Entities.GetSettingReq.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::Core.Entities.Setting> __Marshaller_core_config_Setting = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Core.Entities.Setting.Parser));
+    static readonly grpc::Marshaller<global::Core.Entities.GetSettingRes> __Marshaller_core_config_GetSettingRes = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Core.Entities.GetSettingRes.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::Core.Entities.Keys> __Marshaller_core_config_Keys = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Core.Entities.Keys.Parser));
+    static readonly grpc::Marshaller<global::Core.Entities.SetSettingReq> __Marshaller_core_config_SetSettingReq = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Core.Entities.SetSettingReq.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::Core.Entities.ConfigBlob> __Marshaller_core_config_ConfigBlob = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Core.Entities.ConfigBlob.Parser));
+    static readonly grpc::Marshaller<global::Core.Entities.SetSettingRes> __Marshaller_core_config_SetSettingRes = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Core.Entities.SetSettingRes.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::Core.Entities.SetSetting> __Marshaller_core_config_SetSetting = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Core.Entities.SetSetting.Parser));
+    static readonly grpc::Marshaller<global::Core.Entities.GetUserConfigReq> __Marshaller_core_config_GetUserConfigReq = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Core.Entities.GetUserConfigReq.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::Google.Protobuf.WellKnownTypes.BoolValue> __Marshaller_google_protobuf_BoolValue = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Google.Protobuf.WellKnownTypes.BoolValue.Parser));
+    static readonly grpc::Marshaller<global::Core.Entities.GetUserConfigRes> __Marshaller_core_config_GetUserConfigRes = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Core.Entities.GetUserConfigRes.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::Google.Protobuf.WellKnownTypes.Empty> __Marshaller_google_protobuf_Empty = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Google.Protobuf.WellKnownTypes.Empty.Parser));
+    static readonly grpc::Marshaller<global::Core.Entities.ResetCacheReq> __Marshaller_core_config_ResetCacheReq = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Core.Entities.ResetCacheReq.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::Core.Entities.SetGroupSetting> __Marshaller_core_config_SetGroupSetting = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Core.Entities.SetGroupSetting.Parser));
+    static readonly grpc::Marshaller<global::Core.Entities.ResetCacheRes> __Marshaller_core_config_ResetCacheRes = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Core.Entities.ResetCacheRes.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::Core.Entities.SetGroupSettingResult> __Marshaller_core_config_SetGroupSettingResult = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Core.Entities.SetGroupSettingResult.Parser));
+    static readonly grpc::Marshaller<global::Core.Entities.GetGroupConfigReq> __Marshaller_core_config_GetGroupConfigReq = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Core.Entities.GetGroupConfigReq.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Core.Entities.GetGroupConfigRes> __Marshaller_core_config_GetGroupConfigRes = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Core.Entities.GetGroupConfigRes.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Core.Entities.SetGroupSettingReq> __Marshaller_core_config_SetGroupSettingReq = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Core.Entities.SetGroupSettingReq.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Core.Entities.SetGroupSettingRes> __Marshaller_core_config_SetGroupSettingRes = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Core.Entities.SetGroupSettingRes.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Method<global::Core.Entities.Key, global::Core.Entities.Setting> __Method_GetSetting = new grpc::Method<global::Core.Entities.Key, global::Core.Entities.Setting>(
+    static readonly grpc::Method<global::Core.Entities.GetSettingReq, global::Core.Entities.GetSettingRes> __Method_GetSetting = new grpc::Method<global::Core.Entities.GetSettingReq, global::Core.Entities.GetSettingRes>(
         grpc::MethodType.Unary,
         __ServiceName,
         "GetSetting",
-        __Marshaller_core_config_Key,
-        __Marshaller_core_config_Setting);
+        __Marshaller_core_config_GetSettingReq,
+        __Marshaller_core_config_GetSettingRes);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Method<global::Core.Entities.Keys, global::Core.Entities.ConfigBlob> __Method_GetSettings = new grpc::Method<global::Core.Entities.Keys, global::Core.Entities.ConfigBlob>(
-        grpc::MethodType.Unary,
-        __ServiceName,
-        "GetSettings",
-        __Marshaller_core_config_Keys,
-        __Marshaller_core_config_ConfigBlob);
-
-    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Method<global::Core.Entities.SetSetting, global::Google.Protobuf.WellKnownTypes.BoolValue> __Method_AddSetting = new grpc::Method<global::Core.Entities.SetSetting, global::Google.Protobuf.WellKnownTypes.BoolValue>(
+    static readonly grpc::Method<global::Core.Entities.SetSettingReq, global::Core.Entities.SetSettingRes> __Method_AddSetting = new grpc::Method<global::Core.Entities.SetSettingReq, global::Core.Entities.SetSettingRes>(
         grpc::MethodType.Unary,
         __ServiceName,
         "AddSetting",
-        __Marshaller_core_config_SetSetting,
-        __Marshaller_google_protobuf_BoolValue);
+        __Marshaller_core_config_SetSettingReq,
+        __Marshaller_core_config_SetSettingRes);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::Core.Entities.ConfigBlob> __Method_GetUserConfig = new grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::Core.Entities.ConfigBlob>(
+    static readonly grpc::Method<global::Core.Entities.GetUserConfigReq, global::Core.Entities.GetUserConfigRes> __Method_GetUserConfig = new grpc::Method<global::Core.Entities.GetUserConfigReq, global::Core.Entities.GetUserConfigRes>(
         grpc::MethodType.Unary,
         __ServiceName,
         "GetUserConfig",
-        __Marshaller_google_protobuf_Empty,
-        __Marshaller_core_config_ConfigBlob);
+        __Marshaller_core_config_GetUserConfigReq,
+        __Marshaller_core_config_GetUserConfigRes);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::Google.Protobuf.WellKnownTypes.Empty> __Method_ResetCache = new grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::Google.Protobuf.WellKnownTypes.Empty>(
+    static readonly grpc::Method<global::Core.Entities.ResetCacheReq, global::Core.Entities.ResetCacheRes> __Method_ResetCache = new grpc::Method<global::Core.Entities.ResetCacheReq, global::Core.Entities.ResetCacheRes>(
         grpc::MethodType.Unary,
         __ServiceName,
         "ResetCache",
-        __Marshaller_google_protobuf_Empty,
-        __Marshaller_google_protobuf_Empty);
+        __Marshaller_core_config_ResetCacheReq,
+        __Marshaller_core_config_ResetCacheRes);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Method<global::Core.Entities.Key, global::Core.Entities.ConfigBlob> __Method_GetGroupConfig = new grpc::Method<global::Core.Entities.Key, global::Core.Entities.ConfigBlob>(
+    static readonly grpc::Method<global::Core.Entities.GetGroupConfigReq, global::Core.Entities.GetGroupConfigRes> __Method_GetGroupConfig = new grpc::Method<global::Core.Entities.GetGroupConfigReq, global::Core.Entities.GetGroupConfigRes>(
         grpc::MethodType.Unary,
         __ServiceName,
         "GetGroupConfig",
-        __Marshaller_core_config_Key,
-        __Marshaller_core_config_ConfigBlob);
+        __Marshaller_core_config_GetGroupConfigReq,
+        __Marshaller_core_config_GetGroupConfigRes);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Method<global::Core.Entities.SetGroupSetting, global::Core.Entities.SetGroupSettingResult> __Method_AddGroupSetting = new grpc::Method<global::Core.Entities.SetGroupSetting, global::Core.Entities.SetGroupSettingResult>(
+    static readonly grpc::Method<global::Core.Entities.SetGroupSettingReq, global::Core.Entities.SetGroupSettingRes> __Method_AddGroupSetting = new grpc::Method<global::Core.Entities.SetGroupSettingReq, global::Core.Entities.SetGroupSettingRes>(
         grpc::MethodType.Unary,
         __ServiceName,
         "AddGroupSetting",
-        __Marshaller_core_config_SetGroupSetting,
-        __Marshaller_core_config_SetGroupSettingResult);
+        __Marshaller_core_config_SetGroupSettingReq,
+        __Marshaller_core_config_SetGroupSettingRes);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -131,43 +129,37 @@ namespace Core.Services {
     public abstract partial class ConfigBase
     {
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::System.Threading.Tasks.Task<global::Core.Entities.Setting> GetSetting(global::Core.Entities.Key request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Core.Entities.GetSettingRes> GetSetting(global::Core.Entities.GetSettingReq request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::System.Threading.Tasks.Task<global::Core.Entities.ConfigBlob> GetSettings(global::Core.Entities.Keys request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Core.Entities.SetSettingRes> AddSetting(global::Core.Entities.SetSettingReq request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::System.Threading.Tasks.Task<global::Google.Protobuf.WellKnownTypes.BoolValue> AddSetting(global::Core.Entities.SetSetting request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Core.Entities.GetUserConfigRes> GetUserConfig(global::Core.Entities.GetUserConfigReq request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::System.Threading.Tasks.Task<global::Core.Entities.ConfigBlob> GetUserConfig(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Core.Entities.ResetCacheRes> ResetCache(global::Core.Entities.ResetCacheReq request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::System.Threading.Tasks.Task<global::Google.Protobuf.WellKnownTypes.Empty> ResetCache(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Core.Entities.GetGroupConfigRes> GetGroupConfig(global::Core.Entities.GetGroupConfigReq request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::System.Threading.Tasks.Task<global::Core.Entities.ConfigBlob> GetGroupConfig(global::Core.Entities.Key request, grpc::ServerCallContext context)
-      {
-        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
-      }
-
-      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::System.Threading.Tasks.Task<global::Core.Entities.SetGroupSettingResult> AddGroupSetting(global::Core.Entities.SetGroupSetting request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Core.Entities.SetGroupSettingRes> AddGroupSetting(global::Core.Entities.SetGroupSettingReq request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -202,142 +194,122 @@ namespace Core.Services {
       }
 
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::Core.Entities.Setting GetSetting(global::Core.Entities.Key request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Core.Entities.GetSettingRes GetSetting(global::Core.Entities.GetSettingReq request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return GetSetting(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::Core.Entities.Setting GetSetting(global::Core.Entities.Key request, grpc::CallOptions options)
+      public virtual global::Core.Entities.GetSettingRes GetSetting(global::Core.Entities.GetSettingReq request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_GetSetting, null, options, request);
       }
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncUnaryCall<global::Core.Entities.Setting> GetSettingAsync(global::Core.Entities.Key request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Core.Entities.GetSettingRes> GetSettingAsync(global::Core.Entities.GetSettingReq request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return GetSettingAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncUnaryCall<global::Core.Entities.Setting> GetSettingAsync(global::Core.Entities.Key request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Core.Entities.GetSettingRes> GetSettingAsync(global::Core.Entities.GetSettingReq request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetSetting, null, options, request);
       }
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::Core.Entities.ConfigBlob GetSettings(global::Core.Entities.Keys request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
-      {
-        return GetSettings(request, new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::Core.Entities.ConfigBlob GetSettings(global::Core.Entities.Keys request, grpc::CallOptions options)
-      {
-        return CallInvoker.BlockingUnaryCall(__Method_GetSettings, null, options, request);
-      }
-      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncUnaryCall<global::Core.Entities.ConfigBlob> GetSettingsAsync(global::Core.Entities.Keys request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
-      {
-        return GetSettingsAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncUnaryCall<global::Core.Entities.ConfigBlob> GetSettingsAsync(global::Core.Entities.Keys request, grpc::CallOptions options)
-      {
-        return CallInvoker.AsyncUnaryCall(__Method_GetSettings, null, options, request);
-      }
-      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::Google.Protobuf.WellKnownTypes.BoolValue AddSetting(global::Core.Entities.SetSetting request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Core.Entities.SetSettingRes AddSetting(global::Core.Entities.SetSettingReq request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return AddSetting(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::Google.Protobuf.WellKnownTypes.BoolValue AddSetting(global::Core.Entities.SetSetting request, grpc::CallOptions options)
+      public virtual global::Core.Entities.SetSettingRes AddSetting(global::Core.Entities.SetSettingReq request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_AddSetting, null, options, request);
       }
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.BoolValue> AddSettingAsync(global::Core.Entities.SetSetting request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Core.Entities.SetSettingRes> AddSettingAsync(global::Core.Entities.SetSettingReq request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return AddSettingAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.BoolValue> AddSettingAsync(global::Core.Entities.SetSetting request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Core.Entities.SetSettingRes> AddSettingAsync(global::Core.Entities.SetSettingReq request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_AddSetting, null, options, request);
       }
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::Core.Entities.ConfigBlob GetUserConfig(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Core.Entities.GetUserConfigRes GetUserConfig(global::Core.Entities.GetUserConfigReq request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return GetUserConfig(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::Core.Entities.ConfigBlob GetUserConfig(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::CallOptions options)
+      public virtual global::Core.Entities.GetUserConfigRes GetUserConfig(global::Core.Entities.GetUserConfigReq request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_GetUserConfig, null, options, request);
       }
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncUnaryCall<global::Core.Entities.ConfigBlob> GetUserConfigAsync(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Core.Entities.GetUserConfigRes> GetUserConfigAsync(global::Core.Entities.GetUserConfigReq request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return GetUserConfigAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncUnaryCall<global::Core.Entities.ConfigBlob> GetUserConfigAsync(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Core.Entities.GetUserConfigRes> GetUserConfigAsync(global::Core.Entities.GetUserConfigReq request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetUserConfig, null, options, request);
       }
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::Google.Protobuf.WellKnownTypes.Empty ResetCache(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Core.Entities.ResetCacheRes ResetCache(global::Core.Entities.ResetCacheReq request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return ResetCache(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::Google.Protobuf.WellKnownTypes.Empty ResetCache(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::CallOptions options)
+      public virtual global::Core.Entities.ResetCacheRes ResetCache(global::Core.Entities.ResetCacheReq request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_ResetCache, null, options, request);
       }
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.Empty> ResetCacheAsync(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Core.Entities.ResetCacheRes> ResetCacheAsync(global::Core.Entities.ResetCacheReq request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return ResetCacheAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.Empty> ResetCacheAsync(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Core.Entities.ResetCacheRes> ResetCacheAsync(global::Core.Entities.ResetCacheReq request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_ResetCache, null, options, request);
       }
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::Core.Entities.ConfigBlob GetGroupConfig(global::Core.Entities.Key request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Core.Entities.GetGroupConfigRes GetGroupConfig(global::Core.Entities.GetGroupConfigReq request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return GetGroupConfig(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::Core.Entities.ConfigBlob GetGroupConfig(global::Core.Entities.Key request, grpc::CallOptions options)
+      public virtual global::Core.Entities.GetGroupConfigRes GetGroupConfig(global::Core.Entities.GetGroupConfigReq request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_GetGroupConfig, null, options, request);
       }
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncUnaryCall<global::Core.Entities.ConfigBlob> GetGroupConfigAsync(global::Core.Entities.Key request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Core.Entities.GetGroupConfigRes> GetGroupConfigAsync(global::Core.Entities.GetGroupConfigReq request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return GetGroupConfigAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncUnaryCall<global::Core.Entities.ConfigBlob> GetGroupConfigAsync(global::Core.Entities.Key request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Core.Entities.GetGroupConfigRes> GetGroupConfigAsync(global::Core.Entities.GetGroupConfigReq request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetGroupConfig, null, options, request);
       }
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::Core.Entities.SetGroupSettingResult AddGroupSetting(global::Core.Entities.SetGroupSetting request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Core.Entities.SetGroupSettingRes AddGroupSetting(global::Core.Entities.SetGroupSettingReq request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return AddGroupSetting(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::Core.Entities.SetGroupSettingResult AddGroupSetting(global::Core.Entities.SetGroupSetting request, grpc::CallOptions options)
+      public virtual global::Core.Entities.SetGroupSettingRes AddGroupSetting(global::Core.Entities.SetGroupSettingReq request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_AddGroupSetting, null, options, request);
       }
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncUnaryCall<global::Core.Entities.SetGroupSettingResult> AddGroupSettingAsync(global::Core.Entities.SetGroupSetting request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Core.Entities.SetGroupSettingRes> AddGroupSettingAsync(global::Core.Entities.SetGroupSettingReq request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return AddGroupSettingAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual grpc::AsyncUnaryCall<global::Core.Entities.SetGroupSettingResult> AddGroupSettingAsync(global::Core.Entities.SetGroupSetting request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Core.Entities.SetGroupSettingRes> AddGroupSettingAsync(global::Core.Entities.SetGroupSettingReq request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_AddGroupSetting, null, options, request);
       }
@@ -356,7 +328,6 @@ namespace Core.Services {
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
           .AddMethod(__Method_GetSetting, serviceImpl.GetSetting)
-          .AddMethod(__Method_GetSettings, serviceImpl.GetSettings)
           .AddMethod(__Method_AddSetting, serviceImpl.AddSetting)
           .AddMethod(__Method_GetUserConfig, serviceImpl.GetUserConfig)
           .AddMethod(__Method_ResetCache, serviceImpl.ResetCache)
@@ -371,13 +342,12 @@ namespace Core.Services {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     public static void BindService(grpc::ServiceBinderBase serviceBinder, ConfigBase serviceImpl)
     {
-      serviceBinder.AddMethod(__Method_GetSetting, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Core.Entities.Key, global::Core.Entities.Setting>(serviceImpl.GetSetting));
-      serviceBinder.AddMethod(__Method_GetSettings, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Core.Entities.Keys, global::Core.Entities.ConfigBlob>(serviceImpl.GetSettings));
-      serviceBinder.AddMethod(__Method_AddSetting, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Core.Entities.SetSetting, global::Google.Protobuf.WellKnownTypes.BoolValue>(serviceImpl.AddSetting));
-      serviceBinder.AddMethod(__Method_GetUserConfig, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Google.Protobuf.WellKnownTypes.Empty, global::Core.Entities.ConfigBlob>(serviceImpl.GetUserConfig));
-      serviceBinder.AddMethod(__Method_ResetCache, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Google.Protobuf.WellKnownTypes.Empty, global::Google.Protobuf.WellKnownTypes.Empty>(serviceImpl.ResetCache));
-      serviceBinder.AddMethod(__Method_GetGroupConfig, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Core.Entities.Key, global::Core.Entities.ConfigBlob>(serviceImpl.GetGroupConfig));
-      serviceBinder.AddMethod(__Method_AddGroupSetting, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Core.Entities.SetGroupSetting, global::Core.Entities.SetGroupSettingResult>(serviceImpl.AddGroupSetting));
+      serviceBinder.AddMethod(__Method_GetSetting, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Core.Entities.GetSettingReq, global::Core.Entities.GetSettingRes>(serviceImpl.GetSetting));
+      serviceBinder.AddMethod(__Method_AddSetting, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Core.Entities.SetSettingReq, global::Core.Entities.SetSettingRes>(serviceImpl.AddSetting));
+      serviceBinder.AddMethod(__Method_GetUserConfig, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Core.Entities.GetUserConfigReq, global::Core.Entities.GetUserConfigRes>(serviceImpl.GetUserConfig));
+      serviceBinder.AddMethod(__Method_ResetCache, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Core.Entities.ResetCacheReq, global::Core.Entities.ResetCacheRes>(serviceImpl.ResetCache));
+      serviceBinder.AddMethod(__Method_GetGroupConfig, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Core.Entities.GetGroupConfigReq, global::Core.Entities.GetGroupConfigRes>(serviceImpl.GetGroupConfig));
+      serviceBinder.AddMethod(__Method_AddGroupSetting, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Core.Entities.SetGroupSettingReq, global::Core.Entities.SetGroupSettingRes>(serviceImpl.AddGroupSetting));
     }
 
   }

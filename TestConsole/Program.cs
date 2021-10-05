@@ -44,25 +44,25 @@ namespace TestConsole
                         token = await Authenticate();
                         break;
                     case '1':
-                        await GetSetting(client, token);
+                        //await GetSetting(client, token);
                         break;
                     case '2':
-                        await GetGroupConfig(client, token);
+                        //await GetGroupConfig(client, token);
                         break;
                     case '3':
-                        await GetUserConfig(client, token);
+                        //await GetUserConfig(client, token);
                         break;
                     case '4':
-                        await ResetCache(client, token);
+                        //await ResetCache(client, token);
                         break;
                     case '5':
                         exiting = true;
                         break;
                     case '6':
-                        await GetGroupConfigRude(client, token);
+                        //await GetGroupConfigRude(client, token);
                         break;
                     case 'a':
-                        await AddEntry(client, token);
+                        //await AddEntry(client, token);
                         break;
                 }
             }
@@ -116,129 +116,129 @@ namespace TestConsole
             return headers;
         }
 
-        private static async Task GetSetting(Core.Services.Config.ConfigClient client, string token)
-        {
-            Console.WriteLine("Getting a single setting...");
-            try
-            {
-                var headers = GetHeaders(token);
-                Console.Write("Key? ");
-                var keyName = Console.ReadLine();
-                var setting = await client.GetSettingAsync(keyName, headers);
-                Console.WriteLine($"{setting.Key} [{setting.Value}({setting.Type})]");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error getting setting.{Environment.NewLine}{ex}");
-            }
-        }
+        //private static async Task GetSetting(Core.Services.Config.ConfigClient client, string token)
+        //{
+        //    Console.WriteLine("Getting a single setting...");
+        //    try
+        //    {
+        //        var headers = GetHeaders(token);
+        //        Console.Write("Key? ");
+        //        var keyName = Console.ReadLine();
+        //        var setting = await client.GetSettingAsync(keyName, headers);
+        //        Console.WriteLine($"{setting.Key} [{setting.Value}({setting.Type})]");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Error getting setting.{Environment.NewLine}{ex}");
+        //    }
+        //}
 
-        private static async Task GetGroupConfig(Core.Services.Config.ConfigClient client, string token)
-        {
-            Console.WriteLine("Getting group key setting...");
-            try
-            {
-                var headers = GetHeaders(token);
-                Console.Write("Group? ");
-                var keyName = Console.ReadLine();
-                var resp = await client.GetGroupConfigAsync(keyName, headers);
-                foreach (var (index, setting) in resp.Settings.Select((p, i) => (i, p)))
-                    Console.WriteLine($"{index} => {setting.Key} [{setting.Value}({setting.Type})]");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error getting setting.{Environment.NewLine}{ex}");
-            }
-        }
+        //private static async Task GetGroupConfig(Core.Services.Config.ConfigClient client, string token)
+        //{
+        //    Console.WriteLine("Getting group key setting...");
+        //    try
+        //    {
+        //        var headers = GetHeaders(token);
+        //        Console.Write("Group? ");
+        //        var keyName = Console.ReadLine();
+        //        var resp = await client.GetGroupConfigAsync(keyName, headers);
+        //        foreach (var (index, setting) in resp.Settings.Select((p, i) => (i, p)))
+        //            Console.WriteLine($"{index} => {setting.Key} [{setting.Value}({setting.Type})]");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Error getting setting.{Environment.NewLine}{ex}");
+        //    }
+        //}
 
-        private static async Task GetGroupConfigRude(Core.Services.Config.ConfigClient client, string token)
-        {
-            Console.WriteLine("Getting group key setting...");
-            try
-            {
-                var headers = GetHeaders(token);
-                Console.Write("Group? ");
-                var keyName = Console.ReadLine();
-                Console.Write("Rudness? ");
-                var rudeness = Console.ReadLine();
-                if(!int.TryParse(rudeness, out var loops))
-                {
-                    loops = 10;
-                }
-                var sw = Stopwatch.StartNew();
-                for (int i = 0; i < loops; i++)
-                {
-                    await client.GetGroupConfigAsync(keyName, headers);
-                    Console.Write('.');
-                }
-                sw.Stop();
-                Console.WriteLine($"\n {sw.Elapsed} Done.");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error getting setting.{Environment.NewLine}{ex}");
-            }
-        }
+        //private static async Task GetGroupConfigRude(Core.Services.Config.ConfigClient client, string token)
+        //{
+        //    Console.WriteLine("Getting group key setting...");
+        //    try
+        //    {
+        //        var headers = GetHeaders(token);
+        //        Console.Write("Group? ");
+        //        var keyName = Console.ReadLine();
+        //        Console.Write("Rudness? ");
+        //        var rudeness = Console.ReadLine();
+        //        if(!int.TryParse(rudeness, out var loops))
+        //        {
+        //            loops = 10;
+        //        }
+        //        var sw = Stopwatch.StartNew();
+        //        for (int i = 0; i < loops; i++)
+        //        {
+        //            await client.GetGroupConfigAsync(keyName, headers);
+        //            Console.Write('.');
+        //        }
+        //        sw.Stop();
+        //        Console.WriteLine($"\n {sw.Elapsed} Done.");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Error getting setting.{Environment.NewLine}{ex}");
+        //    }
+        //}
 
-        private static async Task GetUserConfig(Core.Services.Config.ConfigClient client, string token)
-        {
-            Console.WriteLine("Getting user's setting...");
-            try
-            {
-                var headers = GetHeaders(token);
-                var resp = await client.GetUserConfigAsync(headers);
-                foreach (var (index, setting) in resp.Settings.Select((p, i) => (i, p)))
-                    Console.WriteLine($"{index} => {setting.Key} [{setting.Value}({setting.Type})]");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error getting setting.{Environment.NewLine}{ex}");
-            }
-        }
+        //private static async Task GetUserConfig(Core.Services.Config.ConfigClient client, string token)
+        //{
+        //    Console.WriteLine("Getting user's setting...");
+        //    try
+        //    {
+        //        var headers = GetHeaders(token);
+        //        var resp = await client.GetUserConfigAsync(headers);
+        //        foreach (var (index, setting) in resp.Settings.Select((p, i) => (i, p)))
+        //            Console.WriteLine($"{index} => {setting.Key} [{setting.Value}({setting.Type})]");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Error getting setting.{Environment.NewLine}{ex}");
+        //    }
+        //}
 
-        private static async Task ResetCache(Core.Services.Config.ConfigClient client, string token)
-        {
-            Console.WriteLine("resetting cache...");
-            try
-            {
-                var headers = GetHeaders(token);
-                var resp = await client.ResetCacheAsync(headers);
-                Console.WriteLine($"Reset Cache");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error resetting cache.{Environment.NewLine}{ex}");
-            }
-        }
+        //private static async Task ResetCache(Core.Services.Config.ConfigClient client, string token)
+        //{
+        //    Console.WriteLine("resetting cache...");
+        //    try
+        //    {
+        //        var headers = GetHeaders(token);
+        //        var resp = await client.ResetCacheAsync(headers);
+        //        Console.WriteLine($"Reset Cache");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Error resetting cache.{Environment.NewLine}{ex}");
+        //    }
+        //}
 
-        private static async Task AddEntry(Core.Services.Config.ConfigClient client, string token)
-        {
-            try
-            {
-                var headers = GetHeaders(token);
-                var key = Prompt("Key? ");
-                var value = Prompt("Value? ");
-                var encryptStr = Prompt("Encrypt? ");
-                var encrypt = encryptStr.ToUpperInvariant()[0] == 'Y';
-                var typeStr = Prompt("Type? ");
-                var type = Enum.Parse<SettingType>(typeStr, true);
-                var app = Prompt("App? ");
-                var env = Prompt("Env? ");
-                var domain = Prompt("Domain? ");
-                var user = Prompt("User? ");
-                var newSetting = new SetSetting
-                {
-                    Application = app, Domain = domain, Encrypt = encrypt, Environment = env, Key = key,
-                    Type = type, UserName = user, Value = value
-                };
-                var resp = await client.AddSettingAsync(newSetting, headers);
-                Console.WriteLine("Success? {0}", resp.Value);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error in adding entry.{Environment.NewLine}{ex}");
-            }
-        }
+        //private static async Task AddEntry(Core.Services.Config.ConfigClient client, string token)
+        //{
+        //    try
+        //    {
+        //        var headers = GetHeaders(token);
+        //        var key = Prompt("Key? ");
+        //        var value = Prompt("Value? ");
+        //        var encryptStr = Prompt("Encrypt? ");
+        //        var encrypt = encryptStr.ToUpperInvariant()[0] == 'Y';
+        //        var typeStr = Prompt("Type? ");
+        //        var type = Enum.Parse<SettingType>(typeStr, true);
+        //        var app = Prompt("App? ");
+        //        var env = Prompt("Env? ");
+        //        var domain = Prompt("Domain? ");
+        //        var user = Prompt("User? ");
+        //        var newSetting = new SetSetting
+        //        {
+        //            Application = app, Domain = domain, Encrypt = encrypt, Environment = env, Key = key,
+        //            Type = type, UserName = user, Value = value
+        //        };
+        //        var resp = await client.AddSettingAsync(newSetting, headers);
+        //        Console.WriteLine("Success? {0}", resp.Value);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Error in adding entry.{Environment.NewLine}{ex}");
+        //    }
+        //}
 
         private static string Prompt(string message)
         {

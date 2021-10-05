@@ -2,7 +2,7 @@ using Autofac;
 using Core.Contracts;
 using Core.DataAccess;
 
-namespace Core.Business.Module
+namespace Core.Business.Bootstrapping
 {
     public class DataAccessModule : Autofac.Module
     {

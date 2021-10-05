@@ -3,15 +3,7 @@ package core.config;
 
 option csharp_namespace = "Core.Entities";
 
-message Key {
-    string value = 1;
-}
-
-message Keys {
-    repeated string values = 1;
-}
-
-message SetSetting {
+message SetSettingReq {
     string key = 1;
     string value = 2;
     SettingType type = 3;
@@ -22,23 +14,23 @@ message SetSetting {
     bool encrypt = 8;
 }
 
-message SetGroupSetting {
+message SetGroupSettingReq {
     string groupName = 1;
     repeated string keys = 2;
 }
 
-message SetGroupSettingResult {
+message SetGroupSettingRes {
     string groupName = 1;
-    repeated SetGroupSettingKeyResult results = 2;
+    repeated SetGroupSettingKeyRes results = 2;
     bool success = 3;
 }
 
-message SetGroupSettingKeyResult {
+message SetGroupSettingKeyRes {
     string key = 1;
     bool success = 2;
 }
 
-message ConfigBlob {
+message ConfigEntries {
     repeated Setting settings = 1;
 }
 
@@ -51,11 +43,50 @@ enum SettingType {
     STRING_ARRAY = 5;
     INT_ARRAY = 6;
     URI = 7;
-    
 }
 
 message Setting {
     string key = 1;
     string value = 2;
     SettingType type = 3;
+}
+
+message GetGroupConfigReq {
+    string groupName = 1;
+    string userName = 2;
+    string domain = 3;
+    string application = 4;
+}
+
+message GetGroupConfigRes {
+    ConfigEntries config = 1;
+}
+
+message GetUserConfigRes {
+    ConfigEntries config = 1;
+}
+
+message GetSettingReq {
+    repeated string keyNames = 1;
+    string userName = 2;
+    string domain = 3;
+    string application = 4;
+}
+
+message SetSettingRes {
+    bool success = 1;
+}
+
+message GetSettingRes {
+    repeated Setting settings = 1;
+}
+
+message ResetCacheReq {}
+
+message ResetCacheRes {}
+
+message GetUserConfigReq {
+    string userName = 1;
+    string domain = 2;
+    string application = 3;
 }

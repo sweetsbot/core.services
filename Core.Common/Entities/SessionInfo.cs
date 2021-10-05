@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Core.Entities
 {
-    public sealed class SessionInfo : IEquatable<SessionInfo>
+    public sealed class SessionInfo : IEquatable<SessionInfo>, ISessionInfo
     {
         public string DomainName { get; set; }
         public string UserName { get; set; }
@@ -15,10 +15,7 @@ namespace Core.Entities
         public long? SessionId { get; set; }
         public string[] RoleNames { get; set; }
 
-        public override bool Equals(object obj)
-        {
-            return Equals(obj as SessionInfo);
-        }
+        public override bool Equals(object obj) => Equals(obj as SessionInfo);
 
         public bool Equals(SessionInfo other)
         {

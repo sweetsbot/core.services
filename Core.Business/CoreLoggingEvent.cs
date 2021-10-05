@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace CoreServices.Business.Logging
+namespace Core.Business
 {
     public class CoreLoggingEvent : IReadOnlyList<KeyValuePair<string, object>>
     {

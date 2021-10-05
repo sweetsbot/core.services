@@ -9,11 +9,9 @@ namespace Core.Encryption
 {
     public class AesEncryptionProvider : IEncryptionProvider
     {
-        private readonly byte[] _aesKey;
-
-        public AesEncryptionProvider(string key, int keyLength = 24)
+        public AesEncryptionProvider(string key, int keyLength = 32)
         {
-            if (key == null)
+            if (key is null)
                 throw new ArgumentNullException(nameof(key));
             if (string.Empty == key)
                 throw new ArgumentException("Key must have have a valid value.", nameof(key));
@@ -21,27 +19,24 @@ namespace Core.Encryption
                 throw new ArgumentException("Invalid key length, key must be of sizes 16, 24 or 32", nameof(key));
             using var hash = new Crypto.SHA512CryptoServiceProvider();
             var hashed = hash.ComputeHash(Encoding.UTF8.GetBytes(key));
-            _aesKey = new byte[keyLength];
-            Array.ConstrainedCopy(hashed, 0, this._aesKey, 0, keyLength);
+            Key = new byte[keyLength];
+            Array.ConstrainedCopy(hashed, 0, this.Key, 0, keyLength);
         }
 
         private static int[] validLengths = new int[] { 16, 24, 32 };
         public AesEncryptionProvider(byte[] key)
         {
-            if (key == null)
+            if (key is null)
                 throw new ArgumentNullException(nameof(key));
             if (!validLengths.Contains(key.Length))
                 throw new ArgumentException("Invalid key length, key must be of sizes 16, 24 or 32", nameof(key));
-            _aesKey = new byte[key.Length];
-            Array.ConstrainedCopy(key, 0, this._aesKey, 0, key.Length);
+            Key = new byte[key.Length];
+            Array.ConstrainedCopy(key, 0, this.Key, 0, key.Length);
         }
         
-        public byte[] Key => _aesKey;
+        public byte[] Key { get; }
 
-        public string Encrypt(string value)
-        {
-            return Encrypt(value, _aesKey, null);
-        }
+        public string Encrypt(string value) => Encrypt(value, Key, null);
 
         public static string Encrypt(string value, byte[] key, byte[] iv)
         {
@@ -68,7 +63,7 @@ namespace Core.Encryption
 
         public string Decrypt(string encryptedValue)
         {
-            return Decrypt(encryptedValue, _aesKey);
+            return Decrypt(encryptedValue, Key);
         }
 
         public static string Decrypt(string encryptedValue, byte[] key)

@@ -3,3 +3,5 @@ obj/
 /packages/
 /.vs
 /.idea
+appsettings.Development.json
+appsettings.Production.json

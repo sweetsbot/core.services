@@ -5,7 +5,7 @@ using StackExchange.Redis.Extensions.Core.Configuration;
 using StackExchange.Redis.Extensions.Core.Implementations;
 using StackExchange.Redis.Extensions.Newtonsoft;
 
-namespace Core.Business.Module
+namespace Core.Business.Bootstrapping
 {
     public class RedisModule : Autofac.Module
     {
@@ -24,9 +24,6 @@ namespace Core.Business.Module
                 .SingleInstance();
             builder.RegisterType<RedisCacheConnectionPoolManager>()
                 .As<IRedisCacheConnectionPoolManager>()
-                .SingleInstance();
-            builder.RegisterType<RedisDefaultCacheClient>()
-                .As<IRedisDefaultCacheClient>()
                 .SingleInstance();
         }
     }

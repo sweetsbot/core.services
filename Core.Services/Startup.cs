@@ -3,7 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text.Json;
 using Autofac;
-using Core.Business.Module;
+using Core.Business.Bootstrapping;
 using Core.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -73,6 +73,7 @@ namespace Core.Services
         public void ConfigureContainer(ContainerBuilder builder)
         {
             builder.RegisterModule(new RedisModule {RedisConfiguration = Configuration.GetSection("Redis").Get<RedisConfiguration>()});
+            builder.RegisterModule(new AutoMapperModule(typeof(AutoMapperModule).Assembly));
             builder.RegisterModule(new DataAccessModule {CoreConnectionString = Configuration.GetConnectionString("PostgresCore")});
             builder.RegisterModule(new BusinessModule {SecretKey = Configuration.GetValue<string>("SecretKey")});
         }

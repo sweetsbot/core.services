@@ -2,7 +2,7 @@ using Autofac;
 using Core.Contracts;
 using Core.Encryption;
 
-namespace Core.Business.Module
+namespace Core.Business.Bootstrapping
 {
     public class BusinessModule : Autofac.Module
     {
@@ -10,27 +10,26 @@ namespace Core.Business.Module
 
         protected override void Load(ContainerBuilder builder)
         {
-            base.Load(builder);
-
             builder.Register(ctx => new AesEncryptionProvider(SecretKey))
                 .As<IEncryptionProvider>()
                 .InstancePerDependency();
             builder.RegisterType<Cache.RedisConfigCache>()
                 .As<Contracts.IConfigCache>()
                 .InstancePerDependency();
-            builder.RegisterType<ConfigManager>()
-                .Named<IConfigManager>("DatabaseConfig")
+            builder.RegisterType<ConfigLogic>()
+                .Named<IConfigLogic>("DatabaseConfig")
                 .InstancePerDependency();
-            builder.RegisterType<CacheConfigManager>()
+            builder.RegisterType<CacheConfigLogic>()
                 .WithParameter(
-                    (info, context) => info.ParameterType == typeof(IConfigManager),
-                    (info, context) => context.ResolveNamed<IConfigManager>("DatabaseConfig"))
-                .Named<IConfigManager>("CachedConfig")
+                    (info, context) => info.ParameterType == typeof(IConfigLogic),
+                    (info, context) => context.ResolveNamed<IConfigLogic>("DatabaseConfig"))
+                .Named<IConfigLogic>("CachedConfig")
+                .As<ICacheResettable>()
                 .InstancePerDependency();
-            builder.RegisterType<EncryptionConfigManager>()
+            builder.RegisterType<EncryptionConfigLogic>()
                 .WithParameter(
-                    (info, context) => info.ParameterType == typeof(IConfigManager),
-                    (info, context) => context.ResolveNamed<IConfigManager>("CachedConfig"))
+                    (info, context) => info.ParameterType == typeof(IConfigLogic),
+                    (info, context) => context.ResolveNamed<IConfigLogic>("CachedConfig"))
                 .AsImplementedInterfaces()
                 .InstancePerDependency();
         }
